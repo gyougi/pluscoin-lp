@@ -18,7 +18,8 @@ a:hover{text-decoration:underline}
 /* language bar */
 .langbar{position:sticky; top:0; z-index:9; background:rgba(10,10,11,.86); backdrop-filter:saturate(160%) blur(12px);
   border-bottom:1px solid var(--stroke); display:flex; align-items:center; gap:12px; padding:10px 20px}
-.brand{font-weight:700; letter-spacing:.3px; margin-right:auto}
+.brand{display:flex; align-items:center; gap:9px; font-weight:700; letter-spacing:.3px; margin-right:auto}
+.brand .appicon{width:28px; height:28px; border-radius:8px; display:block}
 .brand b{color:var(--gold)}
 .langbtn{background:transparent; border:1px solid var(--stroke); color:var(--muted); border-radius:999px;
   padding:5px 12px; font-size:13px; cursor:pointer}
