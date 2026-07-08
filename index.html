@@ -1,108 +1,428 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PlusCoin — 副業収入台帳</title>
-<meta name="description" content="PlusCoin — クリエイターの副業収入台帳。「稼いだ」と「入金された」を分けて管理。ローカル保存でプライバシー優先。">
-<link rel="stylesheet" href="./style.css">
+<title>PlusCoin — 副業収入台帳 / 入金管理</title>
+<meta name="description" content="クリエイターの副業収入台帳。「稼いだ」と「入金された」を分けて管理。入金予測・締切/催促リマインダー・多通貨・CSV/PDF 書き出し。すべて端末内、プライバシー優先。">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23C9A227'/%3E%3Ctext x='16' y='23' font-size='20' font-family='Arial' font-weight='700' text-anchor='middle' fill='%23000'%3E¥%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PlusCoin — 副業収入台帳">
+<meta property="og:description" content="「稼いだ」と「入金された」を分けて管理。副業のキャッシュフローを、しっかり。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased}
+  :root{
+    --bg:#08080a; --bg2:#0d0d10;
+    --text:#F4F4F6; --dim:rgba(244,244,246,.58); --faint:rgba(244,244,246,.36);
+    --surface:rgba(255,255,255,.045); --surface2:rgba(255,255,255,.07);
+    --border:rgba(255,255,255,.10); --hair:rgba(255,255,255,.07);
+    --gold:#C9A227; --gold2:#E4C97E; --ink:#0c0c0d;
+    --income:#3DD68C; --expense:#FF6B6B;
+    --shadow:0 30px 90px rgba(0,0,0,.6); --shadow-sm:0 14px 40px rgba(0,0,0,.5);
+    --fbody:'Noto Sans JP','Noto Sans SC','Noto Sans TC','Manrope',system-ui,sans-serif;
+    --fdisp:'Manrope','Noto Sans JP',sans-serif;
+  }
+  html{scroll-behavior:smooth;scroll-padding-top:82px}
+  body{
+    background:
+      radial-gradient(58% 46% at 14% 6%, rgba(201,162,39,.14) 0%, transparent 60%),
+      radial-gradient(46% 42% at 92% 14%, rgba(201,162,39,.10) 0%, transparent 58%),
+      radial-gradient(60% 50% at 50% 108%, rgba(201,162,39,.08) 0%, transparent 60%),
+      linear-gradient(180deg,var(--bg2),var(--bg));
+    color:var(--text); font-family:var(--fbody); line-height:1.65; min-height:100vh; overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--gold);color:var(--ink)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+
+  /* NAV */
+  nav{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+    padding:14px clamp(20px,5vw,56px);background:rgba(10,10,12,.62);backdrop-filter:blur(18px) saturate(1.5);
+    -webkit-backdrop-filter:blur(18px) saturate(1.5);border-bottom:1px solid var(--hair)}
+  .logo{display:flex;align-items:center;gap:11px}
+  .coin{width:34px;height:34px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;
+    color:#000;font-weight:800;font-size:19px;box-shadow:var(--shadow-sm)}
+  .logo b{font-family:var(--fdisp);font-weight:800;font-size:19px;letter-spacing:-.01em}
+  .logo b i{color:var(--gold);font-style:normal}
+  .logo small{display:block;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-top:1px}
+  .navlinks{display:flex;gap:28px;font-size:14px;font-weight:500;color:var(--dim)}
+  .navlinks a:hover{color:var(--text)}
+  .navright{display:flex;align-items:center;gap:10px}
+  .langtoggle{display:flex;gap:1px;padding:2px;background:var(--surface2);border:1px solid var(--hair);border-radius:999px}
+  .langtoggle button{border:0;cursor:pointer;background:transparent;color:var(--dim);font:inherit;font-size:11px;font-weight:700;
+    padding:4px 9px;border-radius:999px;transition:.2s}
+  .langtoggle button.on{background:var(--gold);color:#000}
+  .cta{white-space:nowrap;font-size:13px;font-weight:700;color:#000;background:linear-gradient(135deg,var(--gold),var(--gold2));
+    padding:9px 17px;border-radius:999px;box-shadow:var(--shadow-sm);transition:transform .2s}
+  .cta:hover{transform:translateY(-1px)}
+
+  /* HERO */
+  header{position:relative;max-width:1180px;margin:0 auto;padding:132px clamp(20px,5vw,56px) 72px;
+    display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 13px;background:var(--surface2);border:1px solid var(--hair);
+    border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.03em;color:var(--dim)}
+  .eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--gold)}
+  h1{font-family:var(--fdisp);font-weight:800;font-size:clamp(32px,6vw,66px);line-height:1.05;letter-spacing:-.02em;margin:22px 0 18px}
+  h1 .g{background:linear-gradient(110deg,var(--gold2),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{font-size:clamp(15px,1.5vw,18px);color:var(--dim);max-width:38ch}
+  .herobtns{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-top:26px}
+  .appstore{display:inline-flex;align-items:center;gap:11px;background:#fff;color:#000;padding:10px 19px 10px 16px;border-radius:14px;box-shadow:var(--shadow-sm);transition:transform .2s}
+  .appstore:hover{transform:translateY(-1px)}
+  .appstore small{display:block;font-size:10px;opacity:.7;line-height:1.1}
+  .appstore b{display:block;font-size:16px;font-weight:700;font-family:var(--fdisp);line-height:1.15}
+  .ghost{font-size:14px;font-weight:600;color:var(--text);padding:12px 20px;border:1px solid var(--border);border-radius:14px;background:var(--surface2)}
+  .ghost:hover{border-color:var(--gold)}
+
+  /* PHONE MOCKUP */
+  .phone{justify-self:center;width:290px;aspect-ratio:9/19.3;border-radius:44px;padding:11px;
+    background:linear-gradient(150deg,#2a2b31,#0a0a0e);box-shadow:var(--shadow);animation:floaty 7s ease-in-out infinite}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  .screen{width:100%;height:100%;border-radius:34px;background:#0A0A0B;overflow:hidden;padding:22px 16px;display:flex;flex-direction:column;gap:12px;border:1px solid rgba(255,255,255,.05)}
+  .sc-title{text-align:center;font-family:var(--fdisp);font-weight:700;font-size:15px}
+  .sc-title i{color:var(--gold);font-style:normal}
+  .sc-under{width:16px;height:2.5px;background:var(--gold);border-radius:2px;margin:2px auto 0}
+  .sc-hero{background:#141416;border:1px solid var(--hair);border-radius:16px;padding:14px}
+  .sc-hero .lbl{font-size:9px;color:var(--dim)}
+  .sc-hero .big{font-family:var(--fdisp);font-weight:800;font-size:27px;text-align:right;color:#fff;margin-top:2px}
+  .sc-hero .rcv{display:flex;justify-content:space-between;font-size:10px;color:var(--gold);margin-top:6px}
+  .sc-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .sc-cell{background:#141416;border:1px solid var(--hair);border-radius:13px;padding:10px 12px}
+  .sc-cell .lbl{font-size:8.5px;color:var(--dim)}
+  .sc-cell .v{font-family:var(--fdisp);font-weight:800;font-size:15px;text-align:right;margin-top:3px}
+  .g-in{color:var(--income)} .g-ex{color:var(--expense)} .g-gd{color:var(--gold)}
+  .sc-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
+  .chip{font-size:9px;padding:4px 9px;border-radius:999px;border:1px solid var(--hair);color:var(--dim)}
+  .chip.on{border-color:var(--gold);color:var(--gold);background:rgba(201,162,39,.12)}
+
+  /* SECTIONS */
+  section{padding:64px 0;position:relative}
+  .kicker{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+  h2{font-family:var(--fdisp);font-weight:800;font-size:clamp(26px,3.6vw,40px);letter-spacing:-.02em;margin:10px 0 8px}
+  .sub{color:var(--dim);max-width:52ch}
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+  .card{background:var(--surface);border:1px solid var(--hair);border-radius:20px;padding:24px;transition:transform .25s,border-color .25s}
+  .card:hover{transform:translateY(-4px);border-color:rgba(201,162,39,.4)}
+  .card .ic{width:44px;height:44px;border-radius:12px;background:rgba(201,162,39,.13);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+  .card h3{font-family:var(--fdisp);font-weight:700;font-size:17px;margin-bottom:6px}
+  .card p{font-size:14px;color:var(--dim)}
+
+  /* PIPELINE */
+  .pipe{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:30px}
+  .pstep{flex:1;min-width:120px;background:var(--surface);border:1px solid var(--hair);border-radius:14px;padding:16px;text-align:center}
+  .pstep .dot{width:10px;height:10px;border-radius:50%;margin:0 auto 8px}
+  .pstep .t{font-weight:700;font-size:14px}
+  .pstep .d{font-size:11.5px;color:var(--dim);margin-top:2px}
+  .parrow{color:var(--faint);font-size:18px}
+  @media(max-width:760px){.parrow{display:none}}
+
+  /* PRICING */
+  .price{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px;max-width:820px}
+  .plan{background:var(--surface);border:1px solid var(--hair);border-radius:22px;padding:28px}
+  .plan.pro{border-color:rgba(201,162,39,.5);background:linear-gradient(180deg,rgba(201,162,39,.08),transparent)}
+  .plan .name{font-weight:700;font-size:16px}
+  .plan .amt{font-family:var(--fdisp);font-weight:800;font-size:38px;margin:8px 0 2px}
+  .plan .amt small{font-size:14px;color:var(--dim);font-weight:600}
+  .plan ul{list-style:none;margin-top:16px;display:flex;flex-direction:column;gap:9px}
+  .plan li{font-size:14px;color:var(--dim);display:flex;gap:9px}
+  .plan li::before{content:"✓";color:var(--gold);font-weight:800}
+  .pnote{font-size:12.5px;color:var(--faint);margin-top:16px}
+
+  /* PRIVACY strip */
+  .privacy{background:var(--surface);border:1px solid var(--hair);border-radius:24px;padding:38px clamp(24px,4vw,48px);text-align:center;margin-top:8px}
+  .privacy .ic{font-size:34px}
+  .privacy h2{margin-top:8px}
+  .privacy p{color:var(--dim);max-width:56ch;margin:8px auto 0}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--hair);margin-top:40px;padding:34px 0 54px}
+  .foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .foot .links{display:flex;gap:18px;font-size:14px;color:var(--dim);flex-wrap:wrap}
+  .foot .links a:hover{color:var(--gold)}
+  .foot .cr{font-size:13px;color:var(--faint)}
+
+  /* reveal */
+  [data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  [data-reveal].in{opacity:1;transform:none}
+
+  @media(max-width:940px){
+    header{grid-template-columns:1fr;text-align:center;gap:40px;padding-top:118px}
+    .eyebrow,.lead{margin-left:auto;margin-right:auto}
+    .herobtns{justify-content:center}
+    .phone{order:-1}
+    .features{grid-template-columns:1fr 1fr}
+    .navlinks{display:none}
+  }
+  @media(max-width:620px){
+    .features{grid-template-columns:1fr}
+    .price{grid-template-columns:1fr;max-width:420px}
+    .foot{flex-direction:column;text-align:center}
+    .cta{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important}[data-reveal]{opacity:1!important;transform:none!important}}
+</style>
 </head>
 <body>
-<div class="langbar">
-  <span class="brand">Plus<b>Coin</b></span>
-  <button class="langbtn" data-set="ja">日本語</button>
-  <button class="langbtn" data-set="en">EN</button>
-  <button class="langbtn" data-set="zh-Hans">简</button>
-  <button class="langbtn" data-set="zh-Hant">繁</button>
-</div>
 
-<div class="hero">
-  <span class="coin">¥</span>
-  <h1>Plus<b>Coin</b></h1>
-  <div data-lang="ja"><p class="tagline">クリエイターの副業収入台帳。「稼いだ」と「入金された」を分けて管理。</p></div>
-  <div data-lang="en"><p class="tagline">The side-income ledger for creators. Separate what you've <em>earned</em> from what's <em>been paid</em>.</p></div>
-  <div data-lang="zh-Hans"><p class="tagline">面向内容创作者的副业收入台账。区分「赚到了」和「到账了」。</p></div>
-  <div data-lang="zh-Hant"><p class="tagline">面向內容創作者的副業收入台帳。區分「賺到了」和「到帳了」。</p></div>
-  <a class="cta" href="#" id="appstore">App Store</a>
-</div>
-
-<div class="wrap">
-
-  <!-- Features -->
-  <section>
-    <div data-lang="ja">
-      <h2>特長</h2>
-      <div class="features">
-        <div class="feature"><div class="ic">📊</div><h3>各SNSの副収入を集計・可視化</h3><p>プラットフォーム別・収入タイプ別・支出別のグラフ。月次の推移も一目で。</p></div>
-        <div class="feature"><div class="ic">⏳</div><h3>入金予測とリマインダー</h3><p>「未入金」を把握し、締切・催促を自動通知。副業特有の「先に稼いで後で入金」を管理。</p></div>
-        <div class="feature"><div class="ic">🔒</div><h3>データは端末に保存</h3><p>アカウント不要・サーバーなし。同期は各自の iCloud（プライベート）だけ。</p></div>
-        <div class="feature"><div class="ic">🧾</div><h3>CSV / PDF 書き出し</h3><p>確定申告・記録用に。主通貨換算列や領収書の添付も含む。</p></div>
-      </div>
-    </div>
-    <div data-lang="en" hidden>
-      <h2>Highlights</h2>
-      <div class="features">
-        <div class="feature"><div class="ic">📊</div><h3>Aggregate &amp; visualize side income</h3><p>Charts by platform, income type and expense; monthly trends at a glance.</p></div>
-        <div class="feature"><div class="ic">⏳</div><h3>Cash-flow forecast &amp; reminders</h3><p>See what's still owed; automatic deadline and payment-chasing reminders.</p></div>
-        <div class="feature"><div class="ic">🔒</div><h3>Your data stays on device</h3><p>No account, no server. Sync only through your own private iCloud.</p></div>
-        <div class="feature"><div class="ic">🧾</div><h3>CSV / PDF export</h3><p>For taxes and records — with a base-currency column and receipt attachments.</p></div>
-      </div>
-    </div>
-    <div data-lang="zh-Hans" hidden>
-      <h2>特点</h2>
-      <div class="features">
-        <div class="feature"><div class="ic">📊</div><h3>汇总各平台副收入并可视化</h3><p>平台 / 收入类型 / 支出分类占比图，月度趋势一目了然。</p></div>
-        <div class="feature"><div class="ic">⏳</div><h3>待入账预测与提醒</h3><p>看清「还没到账」的钱，截稿与催款自动提醒。管好副业「先赚后到账」的等待。</p></div>
-        <div class="feature"><div class="ic">🔒</div><h3>数据留在本机</h3><p>无需账号、没有服务器。同步只走你自己的私有 iCloud。</p></div>
-        <div class="feature"><div class="ic">🧾</div><h3>CSV / PDF 导出</h3><p>用于报税与存档，含主货币换算列与凭证附件。</p></div>
-      </div>
-    </div>
-    <div data-lang="zh-Hant" hidden>
-      <h2>特點</h2>
-      <div class="features">
-        <div class="feature"><div class="ic">📊</div><h3>彙整各平台副收入並可視化</h3><p>平台 / 收入類型 / 支出分類佔比圖，月度趨勢一目了然。</p></div>
-        <div class="feature"><div class="ic">⏳</div><h3>待入帳預測與提醒</h3><p>看清「還沒到帳」的錢，截稿與催款自動提醒。管好副業「先賺後到帳」的等待。</p></div>
-        <div class="feature"><div class="ic">🔒</div><h3>資料留在本機</h3><p>不需帳號、沒有伺服器。同步只走你自己的私有 iCloud。</p></div>
-        <div class="feature"><div class="ic">🧾</div><h3>CSV / PDF 匯出</h3><p>用於報稅與存檔,含主貨幣換算欄與憑證附件。</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section>
-    <div data-lang="ja"><h2>料金</h2><p>基本機能は<b>無料</b>。7 日間はすべての機能を無料でお試しいただけます。Pro（多通貨換算・全グラフ・入金催促・CSV/PDF 書き出し・iCloud 同期・全テーマ）は<b>買い切り</b>で、一度の購入で永続利用。サブスクリプションではありません。</p></div>
-    <div data-lang="en" hidden><h2>Pricing</h2><p>Core features are <b>free</b>. Try everything free for 7 days. Pro (multi-currency, all charts, payment-chasing reminders, CSV/PDF export, iCloud sync, all themes) is a <b>one-time purchase</b> — yours forever. Not a subscription.</p></div>
-    <div data-lang="zh-Hans" hidden><h2>价格</h2><p>基础功能<b>免费</b>。7 天内全部功能免费试用。Pro(多币种换算、全部图表、催款提醒、CSV/PDF 导出、iCloud 同步、全部皮肤)为<b>一次性买断</b>,永久使用,不是订阅。</p></div>
-    <div data-lang="zh-Hant" hidden><h2>價格</h2><p>基礎功能<b>免費</b>。7 天內全部功能免費試用。Pro(多幣種換算、全部圖表、催款提醒、CSV/PDF 匯出、iCloud 同步、全部主題)為<b>一次性買斷</b>,永久使用,不是訂閱。</p></div>
-  </section>
-
-  <!-- Support -->
-  <section id="support">
-    <div data-lang="ja"><h2>サポート</h2><p>ご質問・不具合報告は <a href="mailto:support@glspace.co.jp">support@glspace.co.jp</a> までお気軽にご連絡ください。通常 2〜3 営業日以内に返信します。</p></div>
-    <div data-lang="en" hidden><h2>Support</h2><p>Questions or bug reports: email <a href="mailto:support@glspace.co.jp">support@glspace.co.jp</a>. We usually reply within 2–3 business days.</p></div>
-    <div data-lang="zh-Hans" hidden><h2>支持</h2><p>问题或反馈请发送邮件至 <a href="mailto:support@glspace.co.jp">support@glspace.co.jp</a>,通常 2–3 个工作日内回复。</p></div>
-    <div data-lang="zh-Hant" hidden><h2>支援</h2><p>問題或回報請寄信至 <a href="mailto:support@glspace.co.jp">support@glspace.co.jp</a>,通常 2–3 個工作日內回覆。</p></div>
-  </section>
-
-</div>
-
-<footer>
-  <div>
-    <a href="./privacy.html" data-lang="ja">プライバシーポリシー</a>
-    <a href="./privacy.html" data-lang="en" hidden>Privacy Policy</a>
-    <a href="./privacy.html" data-lang="zh-Hans" hidden>隐私政策</a>
-    <a href="./privacy.html" data-lang="zh-Hant" hidden>隱私政策</a>
-    ·
-    <a href="./terms.html" data-lang="ja">利用規約</a>
-    <a href="./terms.html" data-lang="en" hidden>Terms of Use</a>
-    <a href="./terms.html" data-lang="zh-Hans" hidden>使用条款</a>
-    <a href="./terms.html" data-lang="zh-Hant" hidden>使用條款</a>
-    ·
-    <a href="mailto:support@glspace.co.jp">support@glspace.co.jp</a>
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#top">
+    <span class="coin">¥</span>
+    <span><b>Plus<i>Coin</i></b><small data-i18n="brand.sub">副業収入台帳</small></span>
+  </a>
+  <div class="navlinks">
+    <a href="#features" data-i18n="nav.features">機能</a>
+    <a href="#flow" data-i18n="nav.flow">仕組み</a>
+    <a href="#pricing" data-i18n="nav.pricing">料金</a>
   </div>
-  <div class="copyright">© 2026 GLSPACE 株式会社</div>
+  <div class="navright">
+    <div class="langtoggle">
+      <button data-set="ja">JA</button>
+      <button data-set="en">EN</button>
+      <button data-set="zh-Hans">简</button>
+      <button data-set="zh-Hant">繁</button>
+    </div>
+    <a class="cta" href="#pricing" data-i18n="nav.cta">入手する</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header id="top">
+  <div>
+    <span class="eyebrow" data-reveal><i></i><span data-i18n="hero.eyebrow">iOS 副業収入台帳</span></span>
+    <h1 data-reveal>
+      <span data-i18n="hero.t1">稼いだと入金を、</span><br>
+      <span class="g" data-i18n="hero.t2">分けて管理。</span>
+    </h1>
+    <p class="lead" data-reveal data-i18n="hero.sub">副業のお金は"先に稼いで後で入金"。PlusCoin は「稼いだ」と「入金された」を分けて管理し、その間の待ち時間と催促までフォローします。</p>
+    <div class="herobtns" data-reveal>
+      <a class="appstore" href="#pricing" data-appstore>
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="#000"><path d="M17.05 12.04c-.03-2.6 2.12-3.85 2.22-3.91-1.21-1.77-3.1-2.01-3.77-2.04-1.6-.16-3.13.94-3.94.94-.81 0-2.07-.92-3.4-.9-1.75.03-3.36 1.02-4.26 2.58-1.82 3.16-.47 7.83 1.3 10.4.86 1.25 1.89 2.66 3.24 2.61 1.3-.05 1.79-.84 3.36-.84 1.57 0 2.01.84 3.38.81 1.4-.02 2.28-1.27 3.13-2.53.99-1.45 1.4-2.86 1.42-2.93-.03-.01-2.72-1.04-2.75-4.13zM14.6 4.59c.71-.86 1.19-2.06 1.06-3.25-1.02.04-2.26.68-2.99 1.54-.66.76-1.23 1.98-1.08 3.15 1.14.09 2.3-.58 3.01-1.44z"/></svg>
+        <span><small data-i18n="hero.badgeTop">App Store で</small><b data-i18n="hero.badgeBig">ダウンロード</b></span>
+      </a>
+      <a class="ghost" href="#features" data-i18n="hero.cta2">機能を見る</a>
+    </div>
+  </div>
+
+  <!-- phone mockup: home screen -->
+  <div class="phone" data-reveal>
+    <div class="screen">
+      <div>
+        <div class="sc-title">Plus<i>Coin</i></div><div class="sc-under"></div>
+      </div>
+      <div class="sc-chips">
+        <span class="chip">今週</span><span class="chip on">今月</span><span class="chip">四半期</span>
+      </div>
+      <div class="sc-hero">
+        <div class="lbl" data-i18n="mock.net">今月の純収入</div>
+        <div class="big">¥152,000</div>
+        <div class="rcv"><span data-i18n="mock.await">入金待ち</span><span>¥88,000</span></div>
+      </div>
+      <div class="sc-grid">
+        <div class="sc-cell"><div class="lbl" data-i18n="mock.income">収入</div><div class="v g-in">¥160,000</div></div>
+        <div class="sc-cell"><div class="lbl" data-i18n="mock.expense">支出</div><div class="v g-ex">¥8,000</div></div>
+        <div class="sc-cell"><div class="lbl" data-i18n="mock.net2">純利益</div><div class="v g-gd">¥152,000</div></div>
+        <div class="sc-cell"><div class="lbl" data-i18n="mock.await">入金待ち</div><div class="v">¥88,000</div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- FEATURES -->
+<section id="features" class="wrap">
+  <div data-reveal>
+    <div class="kicker" data-i18n="feat.kicker">FEATURES</div>
+    <h2 data-i18n="feat.title">副業のお金を、まるごと。</h2>
+    <p class="sub" data-i18n="feat.sub">記録・可視化・入金管理・書き出しまで、副業に必要なものを一つに。</p>
+  </div>
+  <div class="features">
+    <div class="card" data-reveal><div class="ic">📊</div><h3 data-i18n="f1.t">集計と可視化</h3><p data-i18n="f1.d">プラットフォーム別・収入タイプ別・支出別のグラフ。月次の推移も一目で。</p></div>
+    <div class="card" data-reveal><div class="ic">⏳</div><h3 data-i18n="f2.t">入金予測</h3><p data-i18n="f2.d">「未入金」を予定入金月ごとに集計。これから入るお金が見える。</p></div>
+    <div class="card" data-reveal><div class="ic">🔔</div><h3 data-i18n="f3.t">締切・催促リマインダー</h3><p data-i18n="f3.d">締切と予定入金日を自動通知。前倒し日数もカスタマイズ可能。</p></div>
+    <div class="card" data-reveal><div class="ic">💱</div><h3 data-i18n="f4.t">多通貨・参考通貨</h3><p data-i18n="f4.d">実時/記録時レートで換算、もう一つの通貨で対照表示。</p></div>
+    <div class="card" data-reveal><div class="ic">🧾</div><h3 data-i18n="f5.t">CSV / PDF 書き出し</h3><p data-i18n="f5.d">確定申告・記録用に。主通貨換算列や領収書の添付も。</p></div>
+    <div class="card" data-reveal><div class="ic">🔒</div><h3 data-i18n="f6.t">プライバシー優先</h3><p data-i18n="f6.d">アカウント不要・端末内保存。同期は各自の iCloud だけ。</p></div>
+  </div>
+</section>
+
+<!-- FLOW / pipeline -->
+<section id="flow" class="wrap">
+  <div data-reveal>
+    <div class="kicker" data-i18n="flow.kicker">THE DIFFERENCE</div>
+    <h2 data-i18n="flow.title">「稼いだ」と「入金された」を分ける。</h2>
+    <p class="sub" data-i18n="flow.sub">副業のお金は先に稼いで後で入金される。だから入金ステータスで管理する。</p>
+  </div>
+  <div class="pipe" data-reveal>
+    <div class="pstep"><div class="dot" style="background:#9aa0ab"></div><div class="t" data-i18n="s1.t">打診中</div><div class="d" data-i18n="s1.d">これから</div></div>
+    <span class="parrow">→</span>
+    <div class="pstep"><div class="dot" style="background:#4c8dff"></div><div class="t" data-i18n="s2.t">進行中</div><div class="d" data-i18n="s2.d">制作中</div></div>
+    <span class="parrow">→</span>
+    <div class="pstep"><div class="dot" style="background:var(--gold)"></div><div class="t" data-i18n="s3.t">入金待ち</div><div class="d" data-i18n="s3.d">納品済み</div></div>
+    <span class="parrow">→</span>
+    <div class="pstep"><div class="dot" style="background:var(--income)"></div><div class="t" data-i18n="s4.t">入金済み</div><div class="d" data-i18n="s4.d">完了</div></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="wrap">
+  <div data-reveal>
+    <div class="kicker" data-i18n="price.kicker">PRICING</div>
+    <h2 data-i18n="price.title">基本は無料。Pro は買い切り。</h2>
+    <p class="sub" data-i18n="price.sub">7 日間の全機能お試しつき。サブスクリプションではありません。</p>
+  </div>
+  <div class="price">
+    <div class="plan" data-reveal>
+      <div class="name" data-i18n="price.freeName">無料</div>
+      <div class="amt">¥0</div>
+      <ul>
+        <li data-i18n="price.f1">収支の記録・入金ステータス管理</li>
+        <li data-i18n="price.f2">期間の集計・純収入の推移グラフ</li>
+        <li data-i18n="price.f3">締切リマインダー</li>
+      </ul>
+    </div>
+    <div class="plan pro" data-reveal>
+      <div class="name">PlusCoin Pro</div>
+      <div class="amt">$9.99 <small data-i18n="price.once">買い切り</small></div>
+      <ul>
+        <li data-i18n="price.p1">多通貨・参考通貨、全グラフ・入金予測</li>
+        <li data-i18n="price.p2">入金催促リマインダー</li>
+        <li data-i18n="price.p3">CSV / PDF 書き出し・iCloud 同期</li>
+        <li data-i18n="price.p4">全テーマ(6 種類)</li>
+      </ul>
+      <div class="pnote" data-i18n="price.note">一度の購入で永続利用。App 端の 7 日間トライアルつき。</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="wrap">
+  <div class="privacy" data-reveal>
+    <div class="ic">🔒</div>
+    <h2 data-i18n="pv.title">データは、あなたの端末に。</h2>
+    <p data-i18n="pv.desc">アカウント不要・当社サーバーなし。同期はご自身のプライベート iCloud だけ。唯一の通信は為替レートの取得で、個人データは一切送信しません。追跡や解析もありません。</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="wrap" id="support">
+  <div class="foot">
+    <div class="links">
+      <a href="./privacy.html" data-i18n="footer.privacy">プライバシーポリシー</a>
+      <a href="./terms.html" data-i18n="footer.terms">利用規約</a>
+      <a href="mailto:support@glspace.co.jp" data-i18n="footer.support">サポート</a>
+    </div>
+    <div class="cr">© 2026 GLSPACE 株式会社</div>
+  </div>
 </footer>
 
-<script src="./lang.js"></script>
+<script>
+(function(){
+  var I18N = {
+    ja:{ "brand.sub":"副業収入台帳","nav.features":"機能","nav.flow":"仕組み","nav.pricing":"料金","nav.cta":"入手する",
+      "hero.eyebrow":"iOS 副業収入台帳","hero.t1":"稼いだと入金を、","hero.t2":"分けて管理。",
+      "hero.sub":"副業のお金は“先に稼いで後で入金”。PlusCoin は「稼いだ」と「入金された」を分けて管理し、その間の待ち時間と催促までフォローします。",
+      "hero.badgeTop":"App Store で","hero.badgeBig":"ダウンロード","hero.cta2":"機能を見る",
+      "mock.net":"今月の純収入","mock.await":"入金待ち","mock.income":"収入","mock.expense":"支出","mock.net2":"純利益",
+      "feat.kicker":"FEATURES","feat.title":"副業のお金を、まるごと。","feat.sub":"記録・可視化・入金管理・書き出しまで、副業に必要なものを一つに。",
+      "f1.t":"集計と可視化","f1.d":"プラットフォーム別・収入タイプ別・支出別のグラフ。月次の推移も一目で。",
+      "f2.t":"入金予測","f2.d":"「未入金」を予定入金月ごとに集計。これから入るお金が見える。",
+      "f3.t":"締切・催促リマインダー","f3.d":"締切と予定入金日を自動通知。前倒し日数もカスタマイズ可能。",
+      "f4.t":"多通貨・参考通貨","f4.d":"実時/記録時レートで換算、もう一つの通貨で対照表示。",
+      "f5.t":"CSV / PDF 書き出し","f5.d":"確定申告・記録用に。主通貨換算列や領収書の添付も。",
+      "f6.t":"プライバシー優先","f6.d":"アカウント不要・端末内保存。同期は各自の iCloud だけ。",
+      "flow.kicker":"THE DIFFERENCE","flow.title":"「稼いだ」と「入金された」を分ける。","flow.sub":"副業のお金は先に稼いで後で入金される。だから入金ステータスで管理する。",
+      "s1.t":"打診中","s1.d":"これから","s2.t":"進行中","s2.d":"制作中","s3.t":"入金待ち","s3.d":"納品済み","s4.t":"入金済み","s4.d":"完了",
+      "price.kicker":"PRICING","price.title":"基本は無料。Pro は買い切り。","price.sub":"7 日間の全機能お試しつき。サブスクリプションではありません。",
+      "price.freeName":"無料","price.f1":"収支の記録・入金ステータス管理","price.f2":"期間の集計・純収入の推移グラフ","price.f3":"締切リマインダー",
+      "price.once":"買い切り","price.p1":"多通貨・参考通貨、全グラフ・入金予測","price.p2":"入金催促リマインダー","price.p3":"CSV / PDF 書き出し・iCloud 同期","price.p4":"全テーマ(6 種類)",
+      "price.note":"一度の購入で永続利用。App 端の 7 日間トライアルつき。",
+      "pv.title":"データは、あなたの端末に。","pv.desc":"アカウント不要・当社サーバーなし。同期はご自身のプライベート iCloud だけ。唯一の通信は為替レートの取得で、個人データは一切送信しません。追跡や解析もありません。",
+      "footer.privacy":"プライバシーポリシー","footer.terms":"利用規約","footer.support":"サポート" },
+    en:{ "brand.sub":"Side-income ledger","nav.features":"Features","nav.flow":"How it works","nav.pricing":"Pricing","nav.cta":"Get the App",
+      "hero.eyebrow":"iOS side-income ledger","hero.t1":"Earned vs. paid —","hero.t2":"clearly separated.",
+      "hero.sub":"Side-gig money is earned first and paid later. PlusCoin separates what you’ve earned from what’s been paid, and manages the wait (and the chasing) in between.",
+      "hero.badgeTop":"Download on the","hero.badgeBig":"App Store","hero.cta2":"See features",
+      "mock.net":"Net income (month)","mock.await":"Awaiting","mock.income":"Income","mock.expense":"Expense","mock.net2":"Net",
+      "feat.kicker":"FEATURES","feat.title":"Your side income, all in one.","feat.sub":"Log, visualize, track payments and export — everything a side hustle needs.",
+      "f1.t":"Aggregate & visualize","f1.d":"Charts by platform, income type and expense; monthly trends at a glance.",
+      "f2.t":"Cash-flow forecast","f2.d":"Unpaid income grouped by expected month — see what’s coming in.",
+      "f3.t":"Smart reminders","f3.d":"Auto alerts for deadlines and expected payment dates, with custom lead time.",
+      "f4.t":"Multi-currency","f4.d":"Convert at live or record-time rates, with a reference-currency view.",
+      "f5.t":"CSV / PDF export","f5.d":"For taxes and records — base-currency column and receipt attachments.",
+      "f6.t":"Privacy first","f6.d":"No account, stored on device; sync only through your own iCloud.",
+      "flow.kicker":"THE DIFFERENCE","flow.title":"Separate “earned” from “paid”.","flow.sub":"Side money is earned first, paid later — so track it with a payment pipeline.",
+      "s1.t":"Negotiating","s1.d":"Upcoming","s2.t":"In progress","s2.d":"Working","s3.t":"Awaiting","s3.d":"Delivered","s4.t":"Paid","s4.d":"Done",
+      "price.kicker":"PRICING","price.title":"Free core. Pro is one-time.","price.sub":"With a 7-day full trial. Not a subscription.",
+      "price.freeName":"Free","price.f1":"Log income/expense & payment status","price.f2":"Period totals & net-income trend","price.f3":"Deadline reminders",
+      "price.once":"one-time","price.p1":"Multi-currency, all charts & forecast","price.p2":"Payment-chasing reminders","price.p3":"CSV / PDF export & iCloud sync","price.p4":"All 6 themes",
+      "price.note":"One-time purchase, yours forever. 7-day in-app trial.",
+      "pv.title":"Your data stays on your device.","pv.desc":"No account, no servers of ours. Sync only through your own private iCloud. The only network request fetches exchange rates — no personal data is sent, and there’s zero tracking.",
+      "footer.privacy":"Privacy Policy","footer.terms":"Terms of Use","footer.support":"Support" },
+    "zh-Hans":{ "brand.sub":"副业收入台账","nav.features":"功能","nav.flow":"原理","nav.pricing":"价格","nav.cta":"获取 App",
+      "hero.eyebrow":"iOS 副业收入台账","hero.t1":"赚到了和到账了,","hero.t2":"分开管理。",
+      "hero.sub":"副业的钱大多“先赚后到账”。PlusCoin 把「赚到了」和「到账了」分开管理,并帮你盯住中间的等待与催款。",
+      "hero.badgeTop":"在 App Store","hero.badgeBig":"下载","hero.cta2":"查看功能",
+      "mock.net":"本月净收入","mock.await":"待入账","mock.income":"收入","mock.expense":"支出","mock.net2":"净利润",
+      "feat.kicker":"功能","feat.title":"副业的钱,一站管好。","feat.sub":"记录、可视化、到账管理到导出,副业所需一站搞定。",
+      "f1.t":"汇总与可视化","f1.d":"平台 / 收入类型 / 支出分类占比图,月度趋势一目了然。",
+      "f2.t":"待入账预测","f2.d":"未到账收入按预计到账月归集,看清将要进来的钱。",
+      "f3.t":"截稿·催款提醒","f3.d":"截稿与预计到账日自动通知,提前天数可自定义。",
+      "f4.t":"多币种·参考货币","f4.d":"实时/记录时汇率换算,另一种货币对照显示。",
+      "f5.t":"CSV / PDF 导出","f5.d":"用于报税与存档,含主货币换算列与凭证附件。",
+      "f6.t":"隐私优先","f6.d":"无需账号、数据留在本机,同步只走你自己的 iCloud。",
+      "flow.kicker":"核心差异","flow.title":"把「赚到了」和「到账了」分开。","flow.sub":"副业的钱先赚后到账,所以用到账状态来管理。",
+      "s1.t":"待接洽","s1.d":"未开始","s2.t":"进行中","s2.d":"制作中","s3.t":"待结算","s3.d":"已交付","s4.t":"已到账","s4.d":"完成",
+      "price.kicker":"价格","price.title":"基础免费,Pro 买断。","price.sub":"含 7 天全功能试用,不是订阅。",
+      "price.freeName":"免费","price.f1":"记录收支·到账状态管理","price.f2":"期间合计·净收入趋势图","price.f3":"截稿提醒",
+      "price.once":"买断","price.p1":"多币种·参考货币、全部图表·待入账预测","price.p2":"催款提醒","price.p3":"CSV / PDF 导出·iCloud 同步","price.p4":"全部皮肤(6 款)",
+      "price.note":"一次性购买,永久使用。含 App 端 7 天试用。",
+      "pv.title":"数据,留在你的设备上。","pv.desc":"无需账号、没有我们的服务器。同步只走你自己的私有 iCloud。唯一的联网是获取汇率,不发送任何个人数据,也没有任何追踪。",
+      "footer.privacy":"隐私政策","footer.terms":"使用条款","footer.support":"支持" },
+    "zh-Hant":{ "brand.sub":"副業收入台帳","nav.features":"功能","nav.flow":"原理","nav.pricing":"價格","nav.cta":"取得 App",
+      "hero.eyebrow":"iOS 副業收入台帳","hero.t1":"賺到了和到帳了,","hero.t2":"分開管理。",
+      "hero.sub":"副業的錢大多“先賺後到帳”。PlusCoin 把「賺到了」和「到帳了」分開管理,並幫你盯住中間的等待與催款。",
+      "hero.badgeTop":"在 App Store","hero.badgeBig":"下載","hero.cta2":"查看功能",
+      "mock.net":"本月淨收入","mock.await":"待入帳","mock.income":"收入","mock.expense":"支出","mock.net2":"淨利潤",
+      "feat.kicker":"功能","feat.title":"副業的錢,一站管好。","feat.sub":"記錄、可視化、到帳管理到匯出,副業所需一站搞定。",
+      "f1.t":"彙整與可視化","f1.d":"平台 / 收入類型 / 支出分類佔比圖,月度趨勢一目了然。",
+      "f2.t":"待入帳預測","f2.d":"未到帳收入按預計到帳月歸集,看清將要進來的錢。",
+      "f3.t":"截稿·催款提醒","f3.d":"截稿與預計到帳日自動通知,提前天數可自訂。",
+      "f4.t":"多幣種·參考貨幣","f4.d":"即時/記錄時匯率換算,另一種貨幣對照顯示。",
+      "f5.t":"CSV / PDF 匯出","f5.d":"用於報稅與存檔,含主貨幣換算欄與憑證附件。",
+      "f6.t":"隱私優先","f6.d":"不需帳號、資料留在本機,同步只走你自己的 iCloud。",
+      "flow.kicker":"核心差異","flow.title":"把「賺到了」和「到帳了」分開。","flow.sub":"副業的錢先賺後到帳,所以用到帳狀態來管理。",
+      "s1.t":"待接洽","s1.d":"未開始","s2.t":"進行中","s2.d":"製作中","s3.t":"待結算","s3.d":"已交付","s4.t":"已到帳","s4.d":"完成",
+      "price.kicker":"價格","price.title":"基礎免費,Pro 買斷。","price.sub":"含 7 天全功能試用,不是訂閱。",
+      "price.freeName":"免費","price.f1":"記錄收支·到帳狀態管理","price.f2":"期間合計·淨收入趨勢圖","price.f3":"截稿提醒",
+      "price.once":"買斷","price.p1":"多幣種·參考貨幣、全部圖表·待入帳預測","price.p2":"催款提醒","price.p3":"CSV / PDF 匯出·iCloud 同步","price.p4":"全部主題(6 款)",
+      "price.note":"一次性購買,永久使用。含 App 端 7 天試用。",
+      "pv.title":"資料,留在你的裝置上。","pv.desc":"不需帳號、沒有我們的伺服器。同步只走你自己的私有 iCloud。唯一的聯網是取得匯率,不傳送任何個人資料,也沒有任何追蹤。",
+      "footer.privacy":"隱私政策","footer.terms":"使用條款","footer.support":"支援" }
+  };
+  function pick(){
+    var s=localStorage.getItem('pc_lang'); if(s&&I18N[s])return s;
+    var n=(navigator.language||'ja').toLowerCase();
+    if(n.indexOf('ja')===0)return 'ja'; if(n.indexOf('en')===0)return 'en';
+    if(n.indexOf('zh')===0){ if(n.indexOf('tw')>=0||n.indexOf('hk')>=0||n.indexOf('hant')>=0||n.indexOf('mo')>=0)return 'zh-Hant'; return 'zh-Hans'; }
+    return 'ja';
+  }
+  function apply(l){
+    var d=I18N[l]||I18N.ja;
+    document.documentElement.setAttribute('lang', l==='zh-Hans'?'zh-CN':l==='zh-Hant'?'zh-TW':l);
+    document.querySelectorAll('[data-i18n]').forEach(function(e){ var v=d[e.getAttribute('data-i18n')]; if(v!=null)e.textContent=v; });
+    document.querySelectorAll('.langtoggle button').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-set')===l); });
+  }
+  window.setLang=function(l){ localStorage.setItem('pc_lang',l); apply(l); };
+  document.addEventListener('DOMContentLoaded',function(){
+    apply(pick());
+    document.querySelectorAll('.langtoggle button').forEach(function(b){ b.addEventListener('click',function(){ window.setLang(b.getAttribute('data-set')); }); });
+    var io=new IntersectionObserver(function(es){ es.forEach(function(x){ if(x.isIntersecting){ x.target.classList.add('in'); io.unobserve(x.target);} }); },{threshold:.14});
+    document.querySelectorAll('[data-reveal]').forEach(function(e){ io.observe(e); });
+  });
+})();
+</script>
 </body>
 </html>
