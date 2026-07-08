@@ -107,7 +107,9 @@
   .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
   .card{background:var(--surface);border:1px solid var(--hair);border-radius:20px;padding:24px;transition:transform .25s,border-color .25s}
   .card:hover{transform:translateY(-4px);border-color:rgba(201,162,39,.4)}
-  .card .ic{width:44px;height:44px;border-radius:12px;background:rgba(201,162,39,.13);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+  .card .ic{width:46px;height:46px;border-radius:13px;background:linear-gradient(150deg,rgba(201,162,39,.18),rgba(201,162,39,.06));border:1px solid rgba(201,162,39,.22);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+  .card .ic svg{width:23px;height:23px;fill:none;stroke:var(--gold2);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .card:hover .ic{border-color:rgba(201,162,39,.5)}
   .card h3{font-family:var(--fdisp);font-weight:700;font-size:17px;margin-bottom:6px}
   .card p{font-size:14px;color:var(--dim)}
 
@@ -249,12 +251,12 @@
     <p class="sub" data-i18n="feat.sub">記録・可視化・入金管理・書き出しまで、副業に必要なものを一つに。</p>
   </div>
   <div class="features">
-    <div class="card" data-reveal><div class="ic">📊</div><h3 data-i18n="f1.t">集計と可視化</h3><p data-i18n="f1.d">プラットフォーム別・収入タイプ別・支出別のグラフ。月次の推移も一目で。</p></div>
-    <div class="card" data-reveal><div class="ic">⏳</div><h3 data-i18n="f2.t">入金予測</h3><p data-i18n="f2.d">「未入金」を予定入金月ごとに集計。これから入るお金が見える。</p></div>
-    <div class="card" data-reveal><div class="ic">🔔</div><h3 data-i18n="f3.t">締切・催促リマインダー</h3><p data-i18n="f3.d">締切と予定入金日を自動通知。前倒し日数もカスタマイズ可能。</p></div>
-    <div class="card" data-reveal><div class="ic">💱</div><h3 data-i18n="f4.t">多通貨・参考通貨</h3><p data-i18n="f4.d">実時/記録時レートで換算、もう一つの通貨で対照表示。</p></div>
-    <div class="card" data-reveal><div class="ic">🧾</div><h3 data-i18n="f5.t">CSV / PDF 書き出し</h3><p data-i18n="f5.d">確定申告・記録用に。主通貨換算列や領収書の添付も。</p></div>
-    <div class="card" data-reveal><div class="ic">🔒</div><h3 data-i18n="f6.t">プライバシー優先</h3><p data-i18n="f6.d">アカウント不要・端末内保存。同期は各自の iCloud だけ。</p></div>
+    <div class="card" data-reveal><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7.5 18v-5"/><path d="M12 18V8"/><path d="M16.5 18v-8"/><path d="M21 18v-3"/></svg></div><h3 data-i18n="f1.t">集計と可視化</h3><p data-i18n="f1.d">プラットフォーム別・収入タイプ別・支出別のグラフ。月次の推移も一目で。</p></div>
+    <div class="card" data-reveal><div class="ic"><svg viewBox="0 0 24 24"><path d="M7 3h10M7 21h10"/><path d="M8 3v3.6a2 2 0 0 0 .7 1.5L12 12l3.3-3.9a2 2 0 0 0 .7-1.5V3"/><path d="M8 21v-3.6a2 2 0 0 1 .7-1.5L12 12l3.3 3.9a2 2 0 0 1 .7 1.5V21"/></svg></div><h3 data-i18n="f2.t">入金予測</h3><p data-i18n="f2.d">「未入金」を予定入金月ごとに集計。これから入るお金が見える。</p></div>
+    <div class="card" data-reveal><div class="ic"><svg viewBox="0 0 24 24"><path d="M18 8.5a6 6 0 0 0-12 0c0 7-3 8.5-3 8.5h18s-3-1.5-3-8.5"/><path d="M13.7 20.5a2 2 0 0 1-3.4 0"/></svg></div><h3 data-i18n="f3.t">締切・催促リマインダー</h3><p data-i18n="f3.d">締切と予定入金日を自動通知。前倒し日数もカスタマイズ可能。</p></div>
+    <div class="card" data-reveal><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 8h13l-3.5-3.5"/><path d="M20 16H7l3.5 3.5"/></svg></div><h3 data-i18n="f4.t">多通貨・参考通貨</h3><p data-i18n="f4.d">実時/記録時レートで換算、もう一つの通貨で対照表示。</p></div>
+    <div class="card" data-reveal><div class="ic"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 11.5v6"/><path d="M9.5 15l2.5 2.5 2.5-2.5"/></svg></div><h3 data-i18n="f5.t">CSV / PDF 書き出し</h3><p data-i18n="f5.d">確定申告・記録用に。主通貨換算列や領収書の添付も。</p></div>
+    <div class="card" data-reveal><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.4-7 10-3.5-1.6-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3 data-i18n="f6.t">プライバシー優先</h3><p data-i18n="f6.d">アカウント不要・端末内保存。同期は各自の iCloud だけ。</p></div>
   </div>
 </section>
 
