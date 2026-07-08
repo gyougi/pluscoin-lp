@@ -6,10 +6,12 @@
 <title>PlusCoin — 副業収入台帳 / 入金管理</title>
 <meta name="description" content="クリエイターの副業収入台帳。「稼いだ」と「入金された」を分けて管理。入金予測・締切/催促リマインダー・多通貨・CSV/PDF 書き出し。すべて端末内、プライバシー優先。">
 <meta name="theme-color" content="#0A0A0B">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23C9A227'/%3E%3Ctext x='16' y='23' font-size='20' font-family='Arial' font-weight='700' text-anchor='middle' fill='%23000'%3E¥%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="./icon-180.png">
+<link rel="apple-touch-icon" href="./icon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="PlusCoin — 副業収入台帳">
 <meta property="og:description" content="「稼いだ」と「入金された」を分けて管理。副業のキャッシュフローを、しっかり。">
+<meta property="og:image" content="https://pluscoin.glspace.co.jp/icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -44,8 +46,7 @@
     padding:14px clamp(20px,5vw,56px);background:rgba(10,10,12,.62);backdrop-filter:blur(18px) saturate(1.5);
     -webkit-backdrop-filter:blur(18px) saturate(1.5);border-bottom:1px solid var(--hair)}
   .logo{display:flex;align-items:center;gap:11px}
-  .coin{width:34px;height:34px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;
-    color:#000;font-weight:800;font-size:19px;box-shadow:var(--shadow-sm)}
+  .appicon{width:36px;height:36px;border-radius:10px;display:block;box-shadow:var(--shadow-sm)}
   .logo b{font-family:var(--fdisp);font-weight:800;font-size:19px;letter-spacing:-.01em}
   .logo b i{color:var(--gold);font-style:normal}
   .logo small{display:block;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-top:1px}
@@ -141,7 +142,7 @@
   footer{border-top:1px solid var(--hair);margin-top:40px;padding:52px 0 58px}
   .foot{display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px}
   .foot-brand{display:flex;align-items:center;gap:10px}
-  .foot-brand .coin{width:30px;height:30px;font-size:16px}
+  .foot-brand .appicon{width:30px;height:30px;border-radius:8px}
   .foot-brand b{font-family:var(--fdisp);font-weight:800;font-size:17px;letter-spacing:-.01em}
   .foot-brand b i{color:var(--gold);font-style:normal}
   .foot-tag{color:var(--dim);font-size:13.5px;max-width:460px;line-height:1.6}
@@ -179,7 +180,7 @@
 <!-- NAV -->
 <nav>
   <a class="logo" href="#top">
-    <span class="coin">¥</span>
+    <img class="appicon" src="./icon-180.png" alt="PlusCoin" width="36" height="36">
     <span><b>Plus<i>Coin</i></b><small data-i18n="brand.sub">副業収入台帳</small></span>
   </a>
   <div class="navlinks">
@@ -318,7 +319,7 @@
 <!-- FOOTER -->
 <footer class="wrap" id="support">
   <div class="foot">
-    <div class="foot-brand"><span class="coin">¥</span><b>Plus<i>Coin</i></b></div>
+    <div class="foot-brand"><img class="appicon" src="./icon-180.png" alt="PlusCoin" width="30" height="30"><b>Plus<i>Coin</i></b></div>
     <span class="foot-tag" data-i18n="footer.tag">副業の「稼いだ」と「入金された」を分けて管理する収入台帳。買い切り・プライバシー優先。</span>
     <div class="links">
       <a class="foot-home" href="https://glspace.co.jp/" target="_blank" rel="noopener" aria-label="GLSPACE"><svg class="gl-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true"><polygon points="32,3 57,17.5 57,46.5 32,61 7,46.5 7,17.5" stroke="currentColor" stroke-width="3.4" stroke-linejoin="round"/><polyline points="12,45 22,34 28,41 32,25 36,41 42,34 52,45" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="25" r="1.7" fill="var(--gold)"/></svg>GLSPACE</a>
