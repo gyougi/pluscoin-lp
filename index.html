@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PlusCoin — 副業収入台帳</title>
+<meta name="description" content="PlusCoin — クリエイターの副業収入台帳。「稼いだ」と「入金された」を分けて管理。ローカル保存でプライバシー優先。">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="langbar">
+  <span class="brand">Plus<b>Coin</b></span>
+  <button class="langbtn" data-set="ja">日本語</button>
+  <button class="langbtn" data-set="en">EN</button>
+  <button class="langbtn" data-set="zh-Hans">简</button>
+  <button class="langbtn" data-set="zh-Hant">繁</button>
+</div>
+
+<div class="hero">
+  <span class="coin">¥</span>
+  <h1>Plus<b>Coin</b></h1>
+  <div data-lang="ja"><p class="tagline">クリエイターの副業収入台帳。「稼いだ」と「入金された」を分けて管理。</p></div>
+  <div data-lang="en"><p class="tagline">The side-income ledger for creators. Separate what you've <em>earned</em> from what's <em>been paid</em>.</p></div>
+  <div data-lang="zh-Hans"><p class="tagline">面向内容创作者的副业收入台账。区分「赚到了」和「到账了」。</p></div>
+  <div data-lang="zh-Hant"><p class="tagline">面向內容創作者的副業收入台帳。區分「賺到了」和「到帳了」。</p></div>
+  <a class="cta" href="#" id="appstore">App Store</a>
+</div>
+
+<div class="wrap">
+
+  <!-- Features -->
+  <section>
+    <div data-lang="ja">
+      <h2>特長</h2>
+      <div class="features">
+        <div class="feature"><div class="ic">📊</div><h3>各SNSの副収入を集計・可視化</h3><p>プラットフォーム別・収入タイプ別・支出別のグラフ。月次の推移も一目で。</p></div>
+        <div class="feature"><div class="ic">⏳</div><h3>入金予測とリマインダー</h3><p>「未入金」を把握し、締切・催促を自動通知。副業特有の「先に稼いで後で入金」を管理。</p></div>
+        <div class="feature"><div class="ic">🔒</div><h3>データは端末に保存</h3><p>アカウント不要・サーバーなし。同期は各自の iCloud（プライベート）だけ。</p></div>
+        <div class="feature"><div class="ic">🧾</div><h3>CSV / PDF 書き出し</h3><p>確定申告・記録用に。主通貨換算列や領収書の添付も含む。</p></div>
+      </div>
+    </div>
+    <div data-lang="en" hidden>
+      <h2>Highlights</h2>
+      <div class="features">
+        <div class="feature"><div class="ic">📊</div><h3>Aggregate &amp; visualize side income</h3><p>Charts by platform, income type and expense; monthly trends at a glance.</p></div>
+        <div class="feature"><div class="ic">⏳</div><h3>Cash-flow forecast &amp; reminders</h3><p>See what's still owed; automatic deadline and payment-chasing reminders.</p></div>
+        <div class="feature"><div class="ic">🔒</div><h3>Your data stays on device</h3><p>No account, no server. Sync only through your own private iCloud.</p></div>
+        <div class="feature"><div class="ic">🧾</div><h3>CSV / PDF export</h3><p>For taxes and records — with a base-currency column and receipt attachments.</p></div>
+      </div>
+    </div>
+    <div data-lang="zh-Hans" hidden>
+      <h2>特点</h2>
+      <div class="features">
+        <div class="feature"><div class="ic">📊</div><h3>汇总各平台副收入并可视化</h3><p>平台 / 收入类型 / 支出分类占比图，月度趋势一目了然。</p></div>
+        <div class="feature"><div class="ic">⏳</div><h3>待入账预测与提醒</h3><p>看清「还没到账」的钱，截稿与催款自动提醒。管好副业「先赚后到账」的等待。</p></div>
+        <div class="feature"><div class="ic">🔒</div><h3>数据留在本机</h3><p>无需账号、没有服务器。同步只走你自己的私有 iCloud。</p></div>
+        <div class="feature"><div class="ic">🧾</div><h3>CSV / PDF 导出</h3><p>用于报税与存档，含主货币换算列与凭证附件。</p></div>
+      </div>
+    </div>
+    <div data-lang="zh-Hant" hidden>
+      <h2>特點</h2>
+      <div class="features">
+        <div class="feature"><div class="ic">📊</div><h3>彙整各平台副收入並可視化</h3><p>平台 / 收入類型 / 支出分類佔比圖，月度趨勢一目了然。</p></div>
+        <div class="feature"><div class="ic">⏳</div><h3>待入帳預測與提醒</h3><p>看清「還沒到帳」的錢，截稿與催款自動提醒。管好副業「先賺後到帳」的等待。</p></div>
+        <div class="feature"><div class="ic">🔒</div><h3>資料留在本機</h3><p>不需帳號、沒有伺服器。同步只走你自己的私有 iCloud。</p></div>
+        <div class="feature"><div class="ic">🧾</div><h3>CSV / PDF 匯出</h3><p>用於報稅與存檔,含主貨幣換算欄與憑證附件。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section>
+    <div data-lang="ja"><h2>料金</h2><p>基本機能は<b>無料</b>。7 日間はすべての機能を無料でお試しいただけます。Pro（多通貨換算・全グラフ・入金催促・CSV/PDF 書き出し・iCloud 同期・全テーマ）は<b>買い切り</b>で、一度の購入で永続利用・ファミリー共有対応。サブスクリプションではありません。</p></div>
+    <div data-lang="en" hidden><h2>Pricing</h2><p>Core features are <b>free</b>. Try everything free for 7 days. Pro (multi-currency, all charts, payment-chasing reminders, CSV/PDF export, iCloud sync, all themes) is a <b>one-time purchase</b> — yours forever, with Family Sharing. Not a subscription.</p></div>
+    <div data-lang="zh-Hans" hidden><h2>价格</h2><p>基础功能<b>免费</b>。7 天内全部功能免费试用。Pro(多币种换算、全部图表、催款提醒、CSV/PDF 导出、iCloud 同步、全部皮肤)为<b>一次性买断</b>,永久使用、支持家庭共享,不是订阅。</p></div>
+    <div data-lang="zh-Hant" hidden><h2>價格</h2><p>基礎功能<b>免費</b>。7 天內全部功能免費試用。Pro(多幣種換算、全部圖表、催款提醒、CSV/PDF 匯出、iCloud 同步、全部主題)為<b>一次性買斷</b>,永久使用、支援家庭共享,不是訂閱。</p></div>
+  </section>
+
+  <!-- Support -->
+  <section id="support">
+    <div data-lang="ja"><h2>サポート</h2><p>ご質問・不具合報告は <a href="mailto:support@glspace.co.jp">support@glspace.co.jp</a> までお気軽にご連絡ください。通常 2〜3 営業日以内に返信します。</p></div>
+    <div data-lang="en" hidden><h2>Support</h2><p>Questions or bug reports: email <a href="mailto:support@glspace.co.jp">support@glspace.co.jp</a>. We usually reply within 2–3 business days.</p></div>
+    <div data-lang="zh-Hans" hidden><h2>支持</h2><p>问题或反馈请发送邮件至 <a href="mailto:support@glspace.co.jp">support@glspace.co.jp</a>,通常 2–3 个工作日内回复。</p></div>
+    <div data-lang="zh-Hant" hidden><h2>支援</h2><p>問題或回報請寄信至 <a href="mailto:support@glspace.co.jp">support@glspace.co.jp</a>,通常 2–3 個工作日內回覆。</p></div>
+  </section>
+
+</div>
+
+<footer>
+  <div>
+    <a href="./privacy.html" data-lang="ja">プライバシーポリシー</a>
+    <a href="./privacy.html" data-lang="en" hidden>Privacy Policy</a>
+    <a href="./privacy.html" data-lang="zh-Hans" hidden>隐私政策</a>
+    <a href="./privacy.html" data-lang="zh-Hant" hidden>隱私政策</a>
+    ·
+    <a href="./terms.html" data-lang="ja">利用規約</a>
+    <a href="./terms.html" data-lang="en" hidden>Terms of Use</a>
+    <a href="./terms.html" data-lang="zh-Hans" hidden>使用条款</a>
+    <a href="./terms.html" data-lang="zh-Hant" hidden>使用條款</a>
+    ·
+    <a href="mailto:support@glspace.co.jp">support@glspace.co.jp</a>
+  </div>
+  <div class="copyright">© 2026 GLSPACE 株式会社</div>
+</footer>
+
+<script src="./lang.js"></script>
+</body>
+</html>
