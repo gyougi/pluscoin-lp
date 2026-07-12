@@ -123,7 +123,7 @@
   h2{font-family:var(--fdisp);font-weight:800;font-size:clamp(26px,3.6vw,40px);letter-spacing:-.02em;margin:10px 0 8px;text-wrap:balance}
   .lead{text-wrap:pretty}
   /* 短い説明文は balance で行長を均等化し、末尾に「钱。」のような1字孤立を防ぐ */
-  .sub,.card p{text-wrap:balance}
+  .sub,.card p,.foot-tag{text-wrap:balance}
   /* keep-all は短い見出しだけに限定。本文(.lead/.sub)に付けると
      句読点のない長い連続(例:その間の待ち時間と催促まで…)が改行できず右側にはみ出す。 */
   :lang(ja) h1,:lang(ja) h2,:lang(zh-CN) h1,:lang(zh-CN) h2,:lang(zh-TW) h1,:lang(zh-TW) h2{word-break:keep-all;line-break:strict}
