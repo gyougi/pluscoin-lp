@@ -124,6 +124,7 @@
   .lead{text-wrap:pretty}
   /* 短い説明文は balance で行長を均等化し、末尾に「钱。」のような1字孤立を防ぐ */
   .sub,.card p,.foot-tag{text-wrap:balance}
+  .nw{white-space:nowrap}
   /* keep-all は使わない:Safari は 」等で改行しないため、長い見出し
      (例:「稼いだ」と「入金された」を分ける。)が折り返せず右にはみ出す。
      text-wrap:balance に任せて均等 2 行に折り返す(はみ出しは原理上起きない)。 */
@@ -431,7 +432,7 @@
       "f4.t":"多通貨・参考通貨","f4.d":"実時/記録時レートで換算、もう一つの通貨で対照表示。",
       "f5.t":"CSV / PDF 書き出し","f5.d":"確定申告・記録用に。主通貨換算列や領収書の添付も。",
       "f6.t":"プライバシー優先","f6.d":"アカウント不要・端末内保存。同期は各自の iCloud だけ。",
-      "flow.kicker":"THE DIFFERENCE","flow.title":"「稼いだ」と「入金された」を分ける。","flow.sub":"副業のお金は先に稼いで後で入金される。だから入金ステータスで管理する。",
+      "flow.kicker":"THE DIFFERENCE","flow.title":"<span class='nw'>「稼いだ」</span>と<span class='nw'>「入金された」</span>を分ける。","flow.sub":"副業のお金は先に稼いで後で入金される。だから入金ステータスで管理する。",
       "s1.t":"打診中","s1.d":"これから","s2.t":"進行中","s2.d":"制作中","s3.t":"入金待ち","s3.d":"納品済み","s4.t":"入金済み","s4.d":"完了",
       "price.kicker":"PRICING","price.title":"基本は無料。Pro は買い切り。","price.sub":"7 日間の全機能お試しつき。サブスクリプションではありません。",
       "price.freeName":"無料","price.f1":"収支の記録・入金ステータス管理","price.f2":"期間の集計・純収入の推移グラフ","price.f3":"締切リマインダー",
@@ -477,7 +478,7 @@
       "f4.t":"多币种·参考货币","f4.d":"实时/记录时汇率换算,另一种货币对照显示。",
       "f5.t":"CSV / PDF 导出","f5.d":"用于报税与存档,含主货币换算列与凭证附件。",
       "f6.t":"隐私优先","f6.d":"无需账号、数据留在本机,同步只走你自己的 iCloud。",
-      "flow.kicker":"核心差异","flow.title":"把「赚到了」和「到账了」分开。","flow.sub":"副业的钱先赚后到账,所以用到账状态来管理。",
+      "flow.kicker":"核心差异","flow.title":"把<span class='nw'>「赚到了」</span>和<span class='nw'>「到账了」</span>分开。","flow.sub":"副业的钱先赚后到账,所以用到账状态来管理。",
       "s1.t":"待接洽","s1.d":"未开始","s2.t":"进行中","s2.d":"制作中","s3.t":"待结算","s3.d":"已交付","s4.t":"已到账","s4.d":"完成",
       "price.kicker":"价格","price.title":"基础免费,Pro 买断。","price.sub":"含 7 天全功能试用,不是订阅。",
       "price.freeName":"免费","price.f1":"记录收支·到账状态管理","price.f2":"期间合计·净收入趋势图","price.f3":"截稿提醒",
@@ -500,7 +501,7 @@
       "f4.t":"多幣種·參考貨幣","f4.d":"即時/記錄時匯率換算,另一種貨幣對照顯示。",
       "f5.t":"CSV / PDF 匯出","f5.d":"用於報稅與存檔,含主貨幣換算欄與憑證附件。",
       "f6.t":"隱私優先","f6.d":"不需帳號、資料留在本機,同步只走你自己的 iCloud。",
-      "flow.kicker":"核心差異","flow.title":"把「賺到了」和「到帳了」分開。","flow.sub":"副業的錢先賺後到帳,所以用到帳狀態來管理。",
+      "flow.kicker":"核心差異","flow.title":"把<span class='nw'>「賺到了」</span>和<span class='nw'>「到帳了」</span>分開。","flow.sub":"副業的錢先賺後到帳,所以用到帳狀態來管理。",
       "s1.t":"待接洽","s1.d":"未開始","s2.t":"進行中","s2.d":"製作中","s3.t":"待結算","s3.d":"已交付","s4.t":"已到帳","s4.d":"完成",
       "price.kicker":"價格","price.title":"基礎免費,Pro 買斷。","price.sub":"含 7 天全功能試用,不是訂閱。",
       "price.freeName":"免費","price.f1":"記錄收支·到帳狀態管理","price.f2":"期間合計·淨收入趨勢圖","price.f3":"截稿提醒",
@@ -517,7 +518,7 @@
   function apply(l){
     var d=I18N[l]||I18N.ja;
     document.documentElement.setAttribute('lang', l==='zh-Hans'?'zh-CN':l==='zh-Hant'?'zh-TW':l);
-    document.querySelectorAll('[data-i18n]').forEach(function(e){ var v=d[e.getAttribute('data-i18n')]; if(v!=null)e.textContent=v; });
+    document.querySelectorAll('[data-i18n]').forEach(function(e){ var v=d[e.getAttribute('data-i18n')]; if(v!=null){ if(v.indexOf('<')>-1)e.innerHTML=v; else e.textContent=v; } });
     document.querySelectorAll('.langtoggle button').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-set')===l); });
     var dir=(l==='ja')?'./shots/ja/':'./shots/';   // 日本語だけ日本語UIの画面に差し替え
     document.querySelectorAll('.shot img[data-shot]').forEach(function(im){ im.src=dir+im.getAttribute('data-shot')+'.png'; });
