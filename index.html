@@ -79,10 +79,10 @@
   .ghost:hover{border-color:var(--gold)}
 
   /* PHONE MOCKUP */
-  .phone{justify-self:center;width:290px;aspect-ratio:9/19.3;border-radius:44px;padding:11px;
+  .phone{justify-self:center;width:290px;aspect-ratio:9/20.6;border-radius:44px;padding:11px;
     background:linear-gradient(150deg,#2a2b31,#0a0a0e);box-shadow:var(--shadow);animation:floaty 7s ease-in-out infinite}
   @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-  .screen{width:100%;height:100%;border-radius:34px;background:#0A0A0B;overflow:hidden;padding:22px 16px;display:flex;flex-direction:column;gap:12px;border:1px solid rgba(255,255,255,.05)}
+  .screen{width:100%;height:100%;border-radius:34px;background:#0A0A0B;overflow:hidden;padding:22px 16px;display:flex;flex-direction:column;gap:10px;border:1px solid rgba(255,255,255,.05)}
   .sc-title{text-align:center;font-family:var(--fdisp);font-weight:700;font-size:15px}
   .sc-title i{color:var(--gold);font-style:normal}
   .sc-under{width:16px;height:2.5px;background:var(--gold);border-radius:2px;margin:2px auto 0}
@@ -98,6 +98,20 @@
   .sc-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
   .chip{font-size:9px;padding:4px 9px;border-radius:999px;border:1px solid var(--hair);color:var(--dim)}
   .chip.on{border-color:var(--gold);color:var(--gold);background:rgba(201,162,39,.12)}
+  .sc-ref{background:#141416;border:1px solid var(--hair);border-radius:14px;padding:11px 12px}
+  .sc-ref .rhead{display:flex;align-items:center;gap:6px;font-size:11px}
+  .sc-ref .rswap{color:var(--gold);font-size:12px;font-weight:700}
+  .sc-ref .rhead b{font-weight:700;color:var(--text)}
+  .sc-ref .rcur{color:var(--dim)}
+  .sc-ref .rx{margin-left:auto;color:var(--faint);font-size:12px}
+  .sc-ref .rpill{display:flex;flex-direction:column;background:#0e0e11;border:1px solid var(--hair);border-radius:10px;padding:7px 9px;margin:8px 0 7px}
+  .sc-ref .rpill b{font-size:10.5px;color:var(--text);font-weight:600}
+  .sc-ref .rpill small{color:var(--dim);font-size:8px;margin-top:1px}
+  .sc-ref .rrow{display:flex;justify-content:space-between;font-size:10px;color:var(--dim);margin-top:5px}
+  .sc-nav{display:flex;justify-content:space-between;margin-top:auto;padding-top:11px;border-top:1px solid var(--hair)}
+  .sc-nav .nav-i{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:8px;color:var(--faint)}
+  .sc-nav .nav-i svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .sc-nav .nav-i.on{color:var(--gold)}
 
   /* SECTIONS */
   section{padding:64px 0;position:relative}
@@ -242,7 +256,7 @@
         <div class="sc-title">Plus<i>Coin</i></div><div class="sc-under"></div>
       </div>
       <div class="sc-chips">
-        <span class="chip">今週</span><span class="chip on">今月</span><span class="chip">四半期</span>
+        <span class="chip">今週</span><span class="chip on">今月</span><span class="chip">四半期</span><span class="chip">期間指定</span>
       </div>
       <div class="sc-hero">
         <div class="lbl" data-i18n="mock.net">今月の純収入</div>
@@ -254,6 +268,20 @@
         <div class="sc-cell"><div class="lbl" data-i18n="mock.expense">支出</div><div class="v g-ex">¥8,000</div></div>
         <div class="sc-cell"><div class="lbl" data-i18n="mock.net2">純利益</div><div class="v g-gd">¥152,000</div></div>
         <div class="sc-cell"><div class="lbl" data-i18n="mock.await">入金待ち</div><div class="v">¥88,000</div></div>
+      </div>
+      <div class="sc-ref">
+        <div class="rhead"><span class="rswap">⇄</span><b data-i18n="mock.ref">参考</b><span class="rcur" data-i18n="mock.refCur">米ドル</span><span class="rx">✕</span></div>
+        <div class="rpill"><b>100$ ≈ ¥16,000</b><small><span data-i18n="mock.rateUpd">レート更新</span> 07/09 14:57</small></div>
+        <div class="rrow"><span data-i18n="mock.income">収入</span><span class="g-in">$1,000</span></div>
+        <div class="rrow"><span data-i18n="mock.expense">支出</span><span class="g-ex">$50</span></div>
+        <div class="rrow"><span data-i18n="mock.net2">純利益</span><span class="g-gd">$950</span></div>
+        <div class="rrow"><span data-i18n="mock.await">入金待ち</span><span>$550</span></div>
+      </div>
+      <div class="sc-nav">
+        <div class="nav-i on"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span data-i18n="shots.home">ホーム</span></div>
+        <div class="nav-i"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><circle cx="3.5" cy="6" r=".6"/><circle cx="3.5" cy="12" r=".6"/><circle cx="3.5" cy="18" r=".6"/></svg><span data-i18n="shots.ledger">台帳</span></div>
+        <div class="nav-i"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 14l3.5-4 3 2L21 6"/></svg><span data-i18n="shots.charts">グラフ</span></div>
+        <div class="nav-i"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 0 1-4 0v-.1a1.6 1.6 0 0 0-2.7-1.1l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H3a2 2 0 0 1 0-4h.1A1.6 1.6 0 0 0 4.2 9a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg><span data-i18n="shots.settings">設定</span></div>
       </div>
     </div>
   </div>
@@ -374,6 +402,7 @@
       "hero.sub":"副業のお金は“先に稼いで後で入金”。PlusCoin は「稼いだ」と「入金された」を分けて管理し、その間の待ち時間と催促までフォローします。",
       "hero.badgeTop":"App Store で","hero.badgeBig":"ダウンロード","hero.cta2":"機能を見る",
       "mock.net":"今月の純収入","mock.await":"入金待ち","mock.income":"収入","mock.expense":"支出","mock.net2":"純利益",
+      "mock.ref":"参考","mock.refCur":"米ドル","mock.rateUpd":"レート更新",
       "feat.kicker":"FEATURES","feat.title":"副業のお金を、まるごと。","feat.sub":"記録・可視化・入金管理・書き出しまで、副業に必要なものを一つに。",
       "f1.t":"集計と可視化","f1.d":"プラットフォーム別・収入タイプ別・支出別のグラフ。月次の推移も一目で。",
       "f2.t":"入金予測","f2.d":"「未入金」を予定入金月ごとに集計。これから入るお金が見える。",
@@ -396,6 +425,7 @@
       "hero.sub":"Side-gig money is earned first and paid later. PlusCoin separates what you’ve earned from what’s been paid, and manages the wait (and the chasing) in between.",
       "hero.badgeTop":"Download on the","hero.badgeBig":"App Store","hero.cta2":"See features",
       "mock.net":"Net income (month)","mock.await":"Awaiting","mock.income":"Income","mock.expense":"Expense","mock.net2":"Net",
+      "mock.ref":"Reference","mock.refCur":"US Dollar","mock.rateUpd":"Rate updated",
       "feat.kicker":"FEATURES","feat.title":"Your side income, all in one.","feat.sub":"Log, visualize, track payments and export — everything a side hustle needs.",
       "f1.t":"Aggregate & visualize","f1.d":"Charts by platform, income type and expense; monthly trends at a glance.",
       "f2.t":"Cash-flow forecast","f2.d":"Unpaid income grouped by expected month — see what’s coming in.",
@@ -418,6 +448,7 @@
       "hero.sub":"副业的钱大多“先赚后到账”。PlusCoin 把「赚到了」和「到账了」分开管理,并帮你盯住中间的等待与催款。",
       "hero.badgeTop":"在 App Store","hero.badgeBig":"下载","hero.cta2":"查看功能",
       "mock.net":"本月净收入","mock.await":"待入账","mock.income":"收入","mock.expense":"支出","mock.net2":"净利润",
+      "mock.ref":"参考","mock.refCur":"美元","mock.rateUpd":"汇率更新",
       "feat.kicker":"功能","feat.title":"副业的钱,一站管好。","feat.sub":"记录、可视化、到账管理到导出,副业所需一站搞定。",
       "f1.t":"汇总与可视化","f1.d":"平台 / 收入类型 / 支出分类占比图,月度趋势一目了然。",
       "f2.t":"待入账预测","f2.d":"未到账收入按预计到账月归集,看清将要进来的钱。",
@@ -440,6 +471,7 @@
       "hero.sub":"副業的錢大多“先賺後到帳”。PlusCoin 把「賺到了」和「到帳了」分開管理,並幫你盯住中間的等待與催款。",
       "hero.badgeTop":"在 App Store","hero.badgeBig":"下載","hero.cta2":"查看功能",
       "mock.net":"本月淨收入","mock.await":"待入帳","mock.income":"收入","mock.expense":"支出","mock.net2":"淨利潤",
+      "mock.ref":"參考","mock.refCur":"美元","mock.rateUpd":"匯率更新",
       "feat.kicker":"功能","feat.title":"副業的錢,一站管好。","feat.sub":"記錄、可視化、到帳管理到匯出,副業所需一站搞定。",
       "f1.t":"彙整與可視化","f1.d":"平台 / 收入類型 / 支出分類佔比圖,月度趨勢一目了然。",
       "f2.t":"待入帳預測","f2.d":"未到帳收入按預計到帳月歸集,看清將要進來的錢。",
