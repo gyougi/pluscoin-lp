@@ -302,10 +302,10 @@
     <p class="sub" data-i18n="shots.sub">ホーム・台帳・グラフ・設定 — ダークで落ち着いた画面。</p>
   </div>
   <div class="gallery" data-reveal>
-    <figure class="shot"><img src="./shots/home.png" width="994" height="2139" loading="lazy" alt="PlusCoin home"><figcaption class="cap" data-i18n="shots.home">ホーム</figcaption></figure>
-    <figure class="shot"><img src="./shots/ledger.png" width="994" height="2139" loading="lazy" alt="PlusCoin ledger"><figcaption class="cap" data-i18n="shots.ledger">台帳</figcaption></figure>
-    <figure class="shot"><img src="./shots/charts.png" width="994" height="2139" loading="lazy" alt="PlusCoin charts"><figcaption class="cap" data-i18n="shots.charts">グラフ</figcaption></figure>
-    <figure class="shot"><img src="./shots/settings.png" width="994" height="2139" loading="lazy" alt="PlusCoin settings"><figcaption class="cap" data-i18n="shots.settings">設定</figcaption></figure>
+    <figure class="shot"><img data-shot="home" src="./shots/home.png" loading="lazy" alt="PlusCoin home"><figcaption class="cap" data-i18n="shots.home">ホーム</figcaption></figure>
+    <figure class="shot"><img data-shot="ledger" src="./shots/ledger.png" loading="lazy" alt="PlusCoin ledger"><figcaption class="cap" data-i18n="shots.ledger">台帳</figcaption></figure>
+    <figure class="shot"><img data-shot="charts" src="./shots/charts.png" loading="lazy" alt="PlusCoin charts"><figcaption class="cap" data-i18n="shots.charts">グラフ</figcaption></figure>
+    <figure class="shot"><img data-shot="settings" src="./shots/settings.png" loading="lazy" alt="PlusCoin settings"><figcaption class="cap" data-i18n="shots.settings">設定</figcaption></figure>
   </div>
 </section>
 
@@ -468,6 +468,8 @@
     document.documentElement.setAttribute('lang', l==='zh-Hans'?'zh-CN':l==='zh-Hant'?'zh-TW':l);
     document.querySelectorAll('[data-i18n]').forEach(function(e){ var v=d[e.getAttribute('data-i18n')]; if(v!=null)e.textContent=v; });
     document.querySelectorAll('.langtoggle button').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-set')===l); });
+    var dir=(l==='ja')?'./shots/ja/':'./shots/';   // 日本語だけ日本語UIの画面に差し替え
+    document.querySelectorAll('.shot img[data-shot]').forEach(function(im){ im.src=dir+im.getAttribute('data-shot')+'.png'; });
   }
   window.setLang=function(l){ localStorage.setItem('pc_lang',l); apply(l); };
   document.addEventListener('DOMContentLoaded',function(){
