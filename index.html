@@ -124,6 +124,19 @@
   .parrow{color:var(--faint);font-size:18px}
   @media(max-width:760px){.parrow{display:none}}
 
+  /* GALLERY */
+  .gallery{display:flex;gap:26px;overflow-x:auto;scroll-snap-type:x mandatory;margin-top:36px;
+    padding:8px 2px 26px;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+  .gallery::-webkit-scrollbar{display:none}
+  .shot{scroll-snap-align:center;flex:0 0 auto;width:clamp(208px,60vw,242px);text-align:center}
+  .shot img{width:100%;height:auto;display:block;border-radius:34px;background:#0A0A0B;
+    border:1px solid var(--hair);box-shadow:var(--shadow);transition:transform .28s ease}
+  .shot:hover img{transform:translateY(-7px)}
+  .shot .cap{margin-top:15px;font-size:13.5px;font-weight:600;color:var(--dim)}
+  @media(max-width:620px){.gallery{gap:18px;-webkit-mask-image:none;mask-image:none}}
+
   /* PRICING */
   .price{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px;max-width:820px}
   .plan{background:var(--surface);border:1px solid var(--hair);border-radius:22px;padding:28px}
@@ -192,6 +205,7 @@
   <div class="navlinks">
     <a href="#features" data-i18n="nav.features">機能</a>
     <a href="#flow" data-i18n="nav.flow">仕組み</a>
+    <a href="#screens" data-i18n="nav.screens">画面</a>
     <a href="#pricing" data-i18n="nav.pricing">料金</a>
   </div>
   <div class="navright">
@@ -282,6 +296,21 @@
   </div>
 </section>
 
+<!-- GALLERY -->
+<section id="screens" class="wrap">
+  <div data-reveal>
+    <div class="kicker" data-i18n="shots.kicker">SCREENS</div>
+    <h2 data-i18n="shots.title">アプリの画面。</h2>
+    <p class="sub" data-i18n="shots.sub">ホーム・台帳・グラフ・設定 — ダークで落ち着いた画面。</p>
+  </div>
+  <div class="gallery" data-reveal>
+    <figure class="shot"><img src="./shots/home.png" width="994" height="2139" loading="lazy" alt="PlusCoin home"><figcaption class="cap" data-i18n="shots.home">ホーム</figcaption></figure>
+    <figure class="shot"><img src="./shots/ledger.png" width="994" height="2139" loading="lazy" alt="PlusCoin ledger"><figcaption class="cap" data-i18n="shots.ledger">台帳</figcaption></figure>
+    <figure class="shot"><img src="./shots/charts.png" width="994" height="2139" loading="lazy" alt="PlusCoin charts"><figcaption class="cap" data-i18n="shots.charts">グラフ</figcaption></figure>
+    <figure class="shot"><img src="./shots/settings.png" width="994" height="2139" loading="lazy" alt="PlusCoin settings"><figcaption class="cap" data-i18n="shots.settings">設定</figcaption></figure>
+  </div>
+</section>
+
 <!-- PRICING -->
 <section id="pricing" class="wrap">
   <div data-reveal>
@@ -340,7 +369,9 @@
 <script>
 (function(){
   var I18N = {
-    ja:{ "brand.sub":"副業収入台帳","nav.features":"機能","nav.flow":"仕組み","nav.pricing":"料金","nav.cta":"入手する",
+    ja:{ "brand.sub":"副業収入台帳","nav.features":"機能","nav.flow":"仕組み","nav.screens":"画面","nav.pricing":"料金","nav.cta":"入手する",
+      "shots.kicker":"SCREENS","shots.title":"アプリの画面。","shots.sub":"ホーム・台帳・グラフ・設定 — ダークで落ち着いた画面。",
+      "shots.home":"ホーム","shots.ledger":"台帳","shots.charts":"グラフ","shots.settings":"設定",
       "hero.eyebrow":"iOS 副業収入台帳","hero.t1":"稼いだと入金を、","hero.t2":"分けて管理。",
       "hero.sub":"副業のお金は“先に稼いで後で入金”。PlusCoin は「稼いだ」と「入金された」を分けて管理し、その間の待ち時間と催促までフォローします。",
       "hero.badgeTop":"App Store で","hero.badgeBig":"ダウンロード","hero.cta2":"機能を見る",
@@ -360,7 +391,9 @@
       "price.note":"一度の購入で永続利用。App 端の 7 日間トライアルつき。",
       "pv.title":"データは、あなたの端末に。","pv.desc":"アカウント不要・当社サーバーなし。同期はご自身のプライベート iCloud だけ。唯一の通信は為替レートの取得で、個人データは一切送信しません。追跡や解析もありません。",
       "footer.tag":"副業の「稼いだ」と「入金された」を分けて管理する収入台帳。買い切り・プライバシー優先。","footer.privacy":"プライバシーポリシー","footer.terms":"利用規約","footer.support":"サポート","footer.copy":"© 2026 GLSPACE 株式会社. All rights reserved." },
-    en:{ "brand.sub":"Side-income ledger","nav.features":"Features","nav.flow":"How it works","nav.pricing":"Pricing","nav.cta":"Get the App",
+    en:{ "brand.sub":"Side-income ledger","nav.features":"Features","nav.flow":"How it works","nav.screens":"Screens","nav.pricing":"Pricing","nav.cta":"Get the App",
+      "shots.kicker":"SCREENS","shots.title":"A look inside.","shots.sub":"Home, ledger, charts and settings — a calm, dark interface.",
+      "shots.home":"Home","shots.ledger":"Ledger","shots.charts":"Charts","shots.settings":"Settings",
       "hero.eyebrow":"iOS side-income ledger","hero.t1":"Earned vs. paid —","hero.t2":"clearly separated.",
       "hero.sub":"Side-gig money is earned first and paid later. PlusCoin separates what you’ve earned from what’s been paid, and manages the wait (and the chasing) in between.",
       "hero.badgeTop":"Download on the","hero.badgeBig":"App Store","hero.cta2":"See features",
@@ -380,7 +413,9 @@
       "price.note":"One-time purchase, yours forever. 7-day in-app trial.",
       "pv.title":"Your data stays on your device.","pv.desc":"No account, no servers of ours. Sync only through your own private iCloud. The only network request fetches exchange rates — no personal data is sent, and there’s zero tracking.",
       "footer.tag":"A side-income ledger that separates what you’ve earned from what’s been paid. One-time purchase, privacy-first.","footer.privacy":"Privacy Policy","footer.terms":"Terms of Use","footer.support":"Support","footer.copy":"© 2026 GLSPACE Co., Ltd. All rights reserved." },
-    "zh-Hans":{ "brand.sub":"副业收入台账","nav.features":"功能","nav.flow":"原理","nav.pricing":"价格","nav.cta":"获取 App",
+    "zh-Hans":{ "brand.sub":"副业收入台账","nav.features":"功能","nav.flow":"原理","nav.screens":"界面","nav.pricing":"价格","nav.cta":"获取 App",
+      "shots.kicker":"界面预览","shots.title":"界面一览。","shots.sub":"首页、台账、图表、设定 —— 沉稳的深色界面。",
+      "shots.home":"首页","shots.ledger":"台账","shots.charts":"图表","shots.settings":"设定",
       "hero.eyebrow":"iOS 副业收入台账","hero.t1":"赚到了和到账了,","hero.t2":"分开管理。",
       "hero.sub":"副业的钱大多“先赚后到账”。PlusCoin 把「赚到了」和「到账了」分开管理,并帮你盯住中间的等待与催款。",
       "hero.badgeTop":"在 App Store","hero.badgeBig":"下载","hero.cta2":"查看功能",
@@ -400,7 +435,9 @@
       "price.note":"一次性购买,永久使用。含 App 端 7 天试用。",
       "pv.title":"数据,留在你的设备上。","pv.desc":"无需账号、没有我们的服务器。同步只走你自己的私有 iCloud。唯一的联网是获取汇率,不发送任何个人数据,也没有任何追踪。",
       "footer.tag":"把副业的「赚到了」和「到账了」分开管理的收入台账。买断制·隐私优先。","footer.privacy":"隐私政策","footer.terms":"使用条款","footer.support":"支持","footer.copy":"© 2026 GLSPACE 株式会社. 保留所有权利。" },
-    "zh-Hant":{ "brand.sub":"副業收入台帳","nav.features":"功能","nav.flow":"原理","nav.pricing":"價格","nav.cta":"取得 App",
+    "zh-Hant":{ "brand.sub":"副業收入台帳","nav.features":"功能","nav.flow":"原理","nav.screens":"介面","nav.pricing":"價格","nav.cta":"取得 App",
+      "shots.kicker":"介面預覽","shots.title":"介面一覽。","shots.sub":"首頁、台帳、圖表、設定 —— 沉穩的深色介面。",
+      "shots.home":"首頁","shots.ledger":"台帳","shots.charts":"圖表","shots.settings":"設定",
       "hero.eyebrow":"iOS 副業收入台帳","hero.t1":"賺到了和到帳了,","hero.t2":"分開管理。",
       "hero.sub":"副業的錢大多“先賺後到帳”。PlusCoin 把「賺到了」和「到帳了」分開管理,並幫你盯住中間的等待與催款。",
       "hero.badgeTop":"在 App Store","hero.badgeBig":"下載","hero.cta2":"查看功能",
