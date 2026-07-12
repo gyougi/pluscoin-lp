@@ -67,7 +67,7 @@
   .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 13px;background:var(--surface2);border:1px solid var(--hair);
     border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.03em;color:var(--dim)}
   .eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--gold)}
-  h1{font-family:var(--fdisp);font-weight:800;font-size:clamp(32px,6vw,66px);line-height:1.05;letter-spacing:-.02em;margin:22px 0 18px}
+  h1{font-family:var(--fdisp);font-weight:800;font-size:clamp(32px,6vw,66px);line-height:1.05;letter-spacing:-.02em;margin:22px 0 18px;text-wrap:balance}
   h1 .g{background:linear-gradient(110deg,var(--gold2),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
   .lead{font-size:clamp(15px,1.5vw,18px);color:var(--dim);max-width:38ch}
   .herobtns{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-top:26px}
@@ -116,7 +116,9 @@
   /* SECTIONS */
   section{padding:64px 0;position:relative}
   .kicker{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
-  h2{font-family:var(--fdisp);font-weight:800;font-size:clamp(26px,3.6vw,40px);letter-spacing:-.02em;margin:10px 0 8px}
+  h2{font-family:var(--fdisp);font-weight:800;font-size:clamp(26px,3.6vw,40px);letter-spacing:-.02em;margin:10px 0 8px;text-wrap:balance}
+  .sub,.lead{text-wrap:pretty}
+  :lang(ja) h1,:lang(ja) h2,:lang(ja) .lead,:lang(ja) .sub,:lang(zh-CN) h1,:lang(zh-CN) h2,:lang(zh-CN) .lead,:lang(zh-CN) .sub,:lang(zh-TW) h1,:lang(zh-TW) h2,:lang(zh-TW) .lead,:lang(zh-TW) .sub{word-break:keep-all;line-break:strict}
   .sub{color:var(--dim);max-width:52ch}
   .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
   .card{background:var(--surface);border:1px solid var(--hair);border-radius:20px;padding:24px;transition:transform .25s,border-color .25s}
