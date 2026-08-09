@@ -4,6 +4,12 @@
   --text:#F5F5F7; --muted:rgba(255,255,255,.56); --gold:#C9A227; --gold-lite:#E4C97E;
   --maxw:760px;
 }
+
+/* Han glyph shapes differ per language, so Chinese must not fall through to
+   the Japanese font above. Scoped by html[lang], which the switcher sets. */
+html[lang="zh-CN"] body,html[lang="zh-Hans"] body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif}
+html[lang="zh-TW"] body,html[lang="zh-Hant"] body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif}
+
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{
