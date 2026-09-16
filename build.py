@@ -20,6 +20,10 @@ import sys
 SITE = "https://pluscoin.glspace.co.jp"
 APP_NAME = "PlusCoin"
 APPSTORE = "https://apps.apple.com/app/id6788990507"
+# App Store 上の実際の表示名（pluscoin-ios/docs/asc/listing.md の各言語「名称」欄 —— 4 言語とも PlusCoin）
+STORE_NAMES = ["PlusCoin"]
+ORG_URL = "https://glspace.co.jp/"
+ORG_SAMEAS = ["https://apps.glspace.co.jp/"]
 ORG = "GLSPACE Co., Ltd."
 SUPPORT_MAIL = "support@glspace.co.jp"
 OG_IMAGE = SITE + "/icon-512.png"
@@ -148,14 +152,18 @@ def head_extra(lang, d):
             faq.append({"@type": "Question", "name": plain(q),
                         "acceptedAnswer": {"@type": "Answer", "text": plain(a)}})
 
+    # ストア名が name と同じなら alternateName は出さない（空配列を出さない）
+    alt = [n for n in dict.fromkeys(STORE_NAMES) if n != APP_NAME]
     graph = [
         {"@type": "Organization", "@id": SITE + "/#org", "name": ORG,
-         "url": SITE + "/", "email": SUPPORT_MAIL},
+         "url": ORG_URL, "sameAs": ORG_SAMEAS, "email": SUPPORT_MAIL},
         {"@type": "WebSite", "@id": url + "#website", "url": url,
          "name": APP_NAME, "inLanguage": cfg["htmllang"],
          "publisher": {"@id": SITE + "/#org"}},
         # 不写 offers / aggregateRating：站上不标金额，评分也没有真实数据，不编。
         {"@type": "SoftwareApplication", "@id": SITE + "/#app", "name": APP_NAME,
+         **({"alternateName": alt} if alt else {}),
+         "sameAs": [APPSTORE],
          "applicationCategory": APP_CATEGORY, "operatingSystem": APP_OS,
          "description": plain(d["meta.desc"]), "url": url, "installUrl": APPSTORE,
          "image": OG_IMAGE,

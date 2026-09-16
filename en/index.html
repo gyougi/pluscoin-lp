@@ -32,7 +32,7 @@
 <link rel="alternate" hreflang="zh-Hans" href="https://pluscoin.glspace.co.jp/zh/" />
 <link rel="alternate" hreflang="zh-Hant" href="https://pluscoin.glspace.co.jp/zh-hant/" />
 <link rel="alternate" hreflang="x-default" href="https://pluscoin.glspace.co.jp/" />
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://pluscoin.glspace.co.jp/#org","name":"GLSPACE Co., Ltd.","url":"https://pluscoin.glspace.co.jp/","email":"support@glspace.co.jp"},{"@type":"WebSite","@id":"https://pluscoin.glspace.co.jp/en/#website","url":"https://pluscoin.glspace.co.jp/en/","name":"PlusCoin","inLanguage":"en","publisher":{"@id":"https://pluscoin.glspace.co.jp/#org"}},{"@type":"SoftwareApplication","@id":"https://pluscoin.glspace.co.jp/#app","name":"PlusCoin","applicationCategory":"FinanceApplication","operatingSystem":"iOS","description":"A side-income ledger for creators. Track what you have earned separately from what has actually been paid. Payment forecasts, deadline and follow-up reminders, multiple currencies, CSV and PDF export — all on your device.","url":"https://pluscoin.glspace.co.jp/en/","installUrl":"https://apps.apple.com/app/id6788990507","image":"https://pluscoin.glspace.co.jp/icon-512.png","inLanguage":["ja","en","zh-Hans","zh-Hant"],"publisher":{"@id":"https://pluscoin.glspace.co.jp/#org"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://pluscoin.glspace.co.jp/#org","name":"GLSPACE Co., Ltd.","url":"https://glspace.co.jp/","sameAs":["https://apps.glspace.co.jp/"],"email":"support@glspace.co.jp"},{"@type":"WebSite","@id":"https://pluscoin.glspace.co.jp/en/#website","url":"https://pluscoin.glspace.co.jp/en/","name":"PlusCoin","inLanguage":"en","publisher":{"@id":"https://pluscoin.glspace.co.jp/#org"}},{"@type":"SoftwareApplication","@id":"https://pluscoin.glspace.co.jp/#app","name":"PlusCoin","sameAs":["https://apps.apple.com/app/id6788990507"],"applicationCategory":"FinanceApplication","operatingSystem":"iOS","description":"A side-income ledger for creators. Track what you have earned separately from what has actually been paid. Payment forecasts, deadline and follow-up reminders, multiple currencies, CSV and PDF export — all on your device.","url":"https://pluscoin.glspace.co.jp/en/","installUrl":"https://apps.apple.com/app/id6788990507","image":"https://pluscoin.glspace.co.jp/icon-512.png","inLanguage":["ja","en","zh-Hans","zh-Hant"],"publisher":{"@id":"https://pluscoin.glspace.co.jp/#org"}},{"@type":"FAQPage","@id":"https://pluscoin.glspace.co.jp/en/#faq","inLanguage":"en","mainEntity":[{"@type":"Question","name":"Is there an app that tracks side income earned separately from income actually paid?","acceptedAnswer":{"@type":"Answer","text":"PlusCoin is an iPhone side-income ledger for creators and side hustlers. It tracks each job by payment status (negotiating → in progress → awaiting payment → paid), so you can see at a glance the money you are still waiting to receive."}},{"@type":"Question","name":"Is PlusCoin a subscription?","acceptedAnswer":{"@type":"Answer","text":"No, PlusCoin is not a subscription. The core features — recording income and expenses, payment status, period totals and charts, and deadline reminders — are free, and Pro is a one-time purchase. You can try every feature free for 7 days in the app."}},{"@type":"Question","name":"Where does PlusCoin store my data?","acceptedAnswer":{"@type":"Answer","text":"PlusCoin stores your data on your device. No account is needed and there are no servers of ours. If you turn on iCloud sync (Pro), your data syncs only through your own private iCloud database."}},{"@type":"Question","name":"Does PlusCoin connect to the internet or track me?","acceptedAnswer":{"@type":"Answer","text":"The only network request PlusCoin makes is to fetch exchange rates (frankfurter.dev, serving European Central Bank data), and no personal data is sent. It uses no third-party SDKs for ads, analytics or tracking. Pro purchases are handled by Apple’s App Store."}},{"@type":"Question","name":"Can I export my PlusCoin records for taxes?","acceptedAnswer":{"@type":"Answer","text":"Yes. With PlusCoin Pro you can export records as CSV or PDF, including a base-currency column and receipt attachments, for tax filing and record keeping."}},{"@type":"Question","name":"Which devices and languages does PlusCoin support?","acceptedAnswer":{"@type":"Answer","text":"PlusCoin supports iPhone (iOS 17 or later). It is available in Japanese, English, Simplified Chinese and Traditional Chinese."}}]}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -201,6 +201,12 @@
   .plan li::before{content:"✓";color:var(--gold);font-weight:800}
   .pnote{font-size:12.5px;color:var(--faint);margin-top:16px}
 
+  /* FAQ（FAQPage JSON-LD と同じ辞書キーから生成） */
+  .faq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:34px}
+  .faq .card h3{line-height:1.5}
+  .faq .card h3,.faq .card p{overflow-wrap:anywhere}
+  .faq .card p{line-height:1.75;text-wrap:pretty}
+  @media(max-width:760px){.faq{grid-template-columns:minmax(0,1fr)}}
   /* PRIVACY strip */
   .privacy{background:var(--surface);border:1px solid var(--hair);border-radius:24px;padding:38px clamp(24px,4vw,48px);text-align:center;margin-top:8px}
   .privacy .ic{width:58px;height:58px;margin:0 auto;border-radius:16px;display:flex;align-items:center;justify-content:center;
@@ -425,6 +431,22 @@
     <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.4-7 10-3.5-1.6-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
     <h2 data-i18n="pv.title">Your data stays on your device.</h2>
     <p data-i18n="pv.desc">No account, no servers of ours. Sync only through your own private iCloud. The only network request fetches exchange rates — no personal data is sent, and there’s zero tracking.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="wrap">
+  <div data-reveal>
+    <div class="kicker" data-i18n="faq.kicker">FAQ</div>
+    <h2 data-i18n="faq.title">Frequently asked questions.</h2>
+  </div>
+  <div class="faq">
+    <div class="card" data-reveal><h3 data-i18n="faq.q1">Is there an app that tracks side income earned separately from income actually paid?</h3><p data-i18n="faq.a1">PlusCoin is an iPhone side-income ledger for creators and side hustlers. It tracks each job by payment status (negotiating → in progress → awaiting payment → paid), so you can see at a glance the money you are still waiting to receive.</p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q2">Is PlusCoin a subscription?</h3><p data-i18n="faq.a2">No, PlusCoin is not a subscription. The core features — recording income and expenses, payment status, period totals and charts, and deadline reminders — are free, and Pro is a one-time purchase. You can try every feature free for 7 days in the app.</p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q3">Where does PlusCoin store my data?</h3><p data-i18n="faq.a3">PlusCoin stores your data on your device. No account is needed and there are no servers of ours. If you turn on iCloud sync (Pro), your data syncs only through your own private iCloud database.</p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q4">Does PlusCoin connect to the internet or track me?</h3><p data-i18n="faq.a4">The only network request PlusCoin makes is to fetch exchange rates (frankfurter.dev, serving European Central Bank data), and no personal data is sent. It uses no third-party SDKs for ads, analytics or tracking. Pro purchases are handled by Apple’s App Store.</p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q5">Can I export my PlusCoin records for taxes?</h3><p data-i18n="faq.a5">Yes. With PlusCoin Pro you can export records as CSV or PDF, including a base-currency column and receipt attachments, for tax filing and record keeping.</p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q6">Which devices and languages does PlusCoin support?</h3><p data-i18n="faq.a6">PlusCoin supports iPhone (iOS 17 or later). It is available in Japanese, English, Simplified Chinese and Traditional Chinese.</p></div>
   </div>
 </section>
 

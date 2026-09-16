@@ -32,7 +32,7 @@
 <link rel="alternate" hreflang="zh-Hans" href="https://pluscoin.glspace.co.jp/zh/" />
 <link rel="alternate" hreflang="zh-Hant" href="https://pluscoin.glspace.co.jp/zh-hant/" />
 <link rel="alternate" hreflang="x-default" href="https://pluscoin.glspace.co.jp/" />
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://pluscoin.glspace.co.jp/#org","name":"GLSPACE Co., Ltd.","url":"https://pluscoin.glspace.co.jp/","email":"support@glspace.co.jp"},{"@type":"WebSite","@id":"https://pluscoin.glspace.co.jp/zh/#website","url":"https://pluscoin.glspace.co.jp/zh/","name":"PlusCoin","inLanguage":"zh-Hans","publisher":{"@id":"https://pluscoin.glspace.co.jp/#org"}},{"@type":"SoftwareApplication","@id":"https://pluscoin.glspace.co.jp/#app","name":"PlusCoin","applicationCategory":"FinanceApplication","operatingSystem":"iOS","description":"为创作者做的副业收入台账。把「赚到了」和「到账了」分开管理。到账预测、截稿与催款提醒、多币种、CSV/PDF 导出，全部在设备内完成。","url":"https://pluscoin.glspace.co.jp/zh/","installUrl":"https://apps.apple.com/app/id6788990507","image":"https://pluscoin.glspace.co.jp/icon-512.png","inLanguage":["ja","en","zh-Hans","zh-Hant"],"publisher":{"@id":"https://pluscoin.glspace.co.jp/#org"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://pluscoin.glspace.co.jp/#org","name":"GLSPACE Co., Ltd.","url":"https://glspace.co.jp/","sameAs":["https://apps.glspace.co.jp/"],"email":"support@glspace.co.jp"},{"@type":"WebSite","@id":"https://pluscoin.glspace.co.jp/zh/#website","url":"https://pluscoin.glspace.co.jp/zh/","name":"PlusCoin","inLanguage":"zh-Hans","publisher":{"@id":"https://pluscoin.glspace.co.jp/#org"}},{"@type":"SoftwareApplication","@id":"https://pluscoin.glspace.co.jp/#app","name":"PlusCoin","sameAs":["https://apps.apple.com/app/id6788990507"],"applicationCategory":"FinanceApplication","operatingSystem":"iOS","description":"为创作者做的副业收入台账。把「赚到了」和「到账了」分开管理。到账预测、截稿与催款提醒、多币种、CSV/PDF 导出，全部在设备内完成。","url":"https://pluscoin.glspace.co.jp/zh/","installUrl":"https://apps.apple.com/app/id6788990507","image":"https://pluscoin.glspace.co.jp/icon-512.png","inLanguage":["ja","en","zh-Hans","zh-Hant"],"publisher":{"@id":"https://pluscoin.glspace.co.jp/#org"}},{"@type":"FAQPage","@id":"https://pluscoin.glspace.co.jp/zh/#faq","inLanguage":"zh-Hans","mainEntity":[{"@type":"Question","name":"有没有能把副业「挣到的钱」和「已到账的钱」分开记的 App？","acceptedAnswer":{"@type":"Answer","text":"PlusCoin 是一款面向创作者与副业人群的 iPhone 收入台账 App。它按结算状态（待接洽 → 进行中 → 待结算 → 已到账）管理每一笔活儿，还没收到的「待结算」金额一眼就能看到。"}},{"@type":"Question","name":"PlusCoin 是订阅制吗？","acceptedAnswer":{"@type":"Answer","text":"不是，PlusCoin 不是订阅。记录收支、结算状态管理、期间汇总图表、截止提醒等基础功能免费，Pro 为一次性买断。App 内可免费试用全部功能 7 天。"}},{"@type":"Question","name":"PlusCoin 的数据保存在哪里？","acceptedAnswer":{"@type":"Answer","text":"PlusCoin 的数据保存在你的设备里。无需注册账号，也没有我们的服务器。开启 iCloud 同步（Pro）时，数据也只通过你自己的 iCloud 私有数据库同步。"}},{"@type":"Question","name":"PlusCoin 会联网或追踪我吗？","acceptedAnswer":{"@type":"Answer","text":"PlusCoin 对外的网络请求只有获取汇率（frankfurter.dev，提供欧洲央行数据），不发送任何个人数据。不使用任何用于广告、统计分析或追踪的第三方 SDK。Pro 的购买由 Apple App Store 处理。"}},{"@type":"Question","name":"PlusCoin 的记录能导出用于报税吗？","acceptedAnswer":{"@type":"Answer","text":"可以。PlusCoin Pro 支持将记录导出为 CSV / PDF，含主货币换算列与凭证附件，可用于报税与存档。"}},{"@type":"Question","name":"PlusCoin 支持哪些设备和语言？","acceptedAnswer":{"@type":"Answer","text":"PlusCoin 支持 iPhone（iOS 17 及以上）。界面语言有日语、英语、简体中文、繁体中文 4 种。"}}]}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -201,6 +201,12 @@
   .plan li::before{content:"✓";color:var(--gold);font-weight:800}
   .pnote{font-size:12.5px;color:var(--faint);margin-top:16px}
 
+  /* FAQ（FAQPage JSON-LD と同じ辞書キーから生成） */
+  .faq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:34px}
+  .faq .card h3{line-height:1.5}
+  .faq .card h3,.faq .card p{overflow-wrap:anywhere}
+  .faq .card p{line-height:1.75;text-wrap:pretty}
+  @media(max-width:760px){.faq{grid-template-columns:minmax(0,1fr)}}
   /* PRIVACY strip */
   .privacy{background:var(--surface);border:1px solid var(--hair);border-radius:24px;padding:38px clamp(24px,4vw,48px);text-align:center;margin-top:8px}
   .privacy .ic{width:58px;height:58px;margin:0 auto;border-radius:16px;display:flex;align-items:center;justify-content:center;
@@ -425,6 +431,22 @@
     <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.4-7 10-3.5-1.6-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
     <h2 data-i18n="pv.title">数据,留在你的设备上。</h2>
     <p data-i18n="pv.desc">无需账号、没有我们的服务器。同步只走你自己的私有 iCloud。唯一的联网是获取汇率,不发送任何个人数据,也没有任何追踪。</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="wrap">
+  <div data-reveal>
+    <div class="kicker" data-i18n="faq.kicker">FAQ</div>
+    <h2 data-i18n="faq.title">常见问题。</h2>
+  </div>
+  <div class="faq">
+    <div class="card" data-reveal><h3 data-i18n="faq.q1">有没有能把副业「挣到的钱」和「已到账的钱」分开记的 App？</h3><p data-i18n="faq.a1">PlusCoin 是一款面向创作者与副业人群的 iPhone 收入台账 App。它按结算状态（待接洽 → 进行中 → 待结算 → 已到账）管理每一笔活儿，还没收到的「待结算」金额一眼就能看到。</p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q2">PlusCoin 是订阅制吗？</h3><p data-i18n="faq.a2">不是，PlusCoin 不是订阅。记录收支、结算状态管理、期间汇总图表、截止提醒等基础功能免费，Pro 为一次性买断。App 内可免费试用全部功能 7 天。</p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q3">PlusCoin 的数据保存在哪里？</h3><p data-i18n="faq.a3">PlusCoin 的数据保存在你的设备里。无需注册账号，也没有我们的服务器。开启 iCloud 同步（Pro）时，数据也只通过你自己的 iCloud 私有数据库同步。</p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q4">PlusCoin 会联网或追踪我吗？</h3><p data-i18n="faq.a4">PlusCoin 对外的网络请求只有获取汇率（frankfurter.dev，提供欧洲央行数据），不发送任何个人数据。不使用任何用于广告、统计分析或追踪的第三方 SDK。Pro 的购买由 Apple App Store 处理。</p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q5">PlusCoin 的记录能导出用于报税吗？</h3><p data-i18n="faq.a5">可以。PlusCoin Pro 支持将记录导出为 CSV / PDF，含主货币换算列与凭证附件，可用于报税与存档。</p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q6">PlusCoin 支持哪些设备和语言？</h3><p data-i18n="faq.a6">PlusCoin 支持 iPhone（iOS 17 及以上）。界面语言有日语、英语、简体中文、繁体中文 4 种。</p></div>
   </div>
 </section>
 

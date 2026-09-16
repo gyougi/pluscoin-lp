@@ -189,6 +189,12 @@
   .plan li::before{content:"✓";color:var(--gold);font-weight:800}
   .pnote{font-size:12.5px;color:var(--faint);margin-top:16px}
 
+  /* FAQ（FAQPage JSON-LD と同じ辞書キーから生成） */
+  .faq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:34px}
+  .faq .card h3{line-height:1.5}
+  .faq .card h3,.faq .card p{overflow-wrap:anywhere}
+  .faq .card p{line-height:1.75;text-wrap:pretty}
+  @media(max-width:760px){.faq{grid-template-columns:minmax(0,1fr)}}
   /* PRIVACY strip */
   .privacy{background:var(--surface);border:1px solid var(--hair);border-radius:24px;padding:38px clamp(24px,4vw,48px);text-align:center;margin-top:8px}
   .privacy .ic{width:58px;height:58px;margin:0 auto;border-radius:16px;display:flex;align-items:center;justify-content:center;
@@ -413,6 +419,22 @@
     <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.4-7 10-3.5-1.6-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
     <h2 data-i18n="pv.title">データは、あなたの端末に。</h2>
     <p data-i18n="pv.desc">アカウント不要・当社サーバーなし。同期はご自身のプライベート iCloud だけ。唯一の通信は為替レートの取得で、個人データは一切送信しません。追跡や解析もありません。</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="wrap">
+  <div data-reveal>
+    <div class="kicker" data-i18n="faq.kicker">FAQ</div>
+    <h2 data-i18n="faq.title"></h2>
+  </div>
+  <div class="faq">
+    <div class="card" data-reveal><h3 data-i18n="faq.q1"></h3><p data-i18n="faq.a1"></p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q2"></h3><p data-i18n="faq.a2"></p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q3"></h3><p data-i18n="faq.a3"></p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q4"></h3><p data-i18n="faq.a4"></p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q5"></h3><p data-i18n="faq.a5"></p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q6"></h3><p data-i18n="faq.a6"></p></div>
   </div>
 </section>
 

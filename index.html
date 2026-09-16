@@ -32,7 +32,7 @@
 <link rel="alternate" hreflang="zh-Hans" href="https://pluscoin.glspace.co.jp/zh/" />
 <link rel="alternate" hreflang="zh-Hant" href="https://pluscoin.glspace.co.jp/zh-hant/" />
 <link rel="alternate" hreflang="x-default" href="https://pluscoin.glspace.co.jp/" />
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://pluscoin.glspace.co.jp/#org","name":"GLSPACE Co., Ltd.","url":"https://pluscoin.glspace.co.jp/","email":"support@glspace.co.jp"},{"@type":"WebSite","@id":"https://pluscoin.glspace.co.jp/#website","url":"https://pluscoin.glspace.co.jp/","name":"PlusCoin","inLanguage":"ja","publisher":{"@id":"https://pluscoin.glspace.co.jp/#org"}},{"@type":"SoftwareApplication","@id":"https://pluscoin.glspace.co.jp/#app","name":"PlusCoin","applicationCategory":"FinanceApplication","operatingSystem":"iOS","description":"クリエイターの副業収入台帳。「稼いだ」と「入金された」を分けて管理。入金予測・締切/催促リマインダー・多通貨・CSV/PDF 書き出し。すべて端末内、プライバシー優先。","url":"https://pluscoin.glspace.co.jp/","installUrl":"https://apps.apple.com/app/id6788990507","image":"https://pluscoin.glspace.co.jp/icon-512.png","inLanguage":["ja","en","zh-Hans","zh-Hant"],"publisher":{"@id":"https://pluscoin.glspace.co.jp/#org"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://pluscoin.glspace.co.jp/#org","name":"GLSPACE Co., Ltd.","url":"https://glspace.co.jp/","sameAs":["https://apps.glspace.co.jp/"],"email":"support@glspace.co.jp"},{"@type":"WebSite","@id":"https://pluscoin.glspace.co.jp/#website","url":"https://pluscoin.glspace.co.jp/","name":"PlusCoin","inLanguage":"ja","publisher":{"@id":"https://pluscoin.glspace.co.jp/#org"}},{"@type":"SoftwareApplication","@id":"https://pluscoin.glspace.co.jp/#app","name":"PlusCoin","sameAs":["https://apps.apple.com/app/id6788990507"],"applicationCategory":"FinanceApplication","operatingSystem":"iOS","description":"クリエイターの副業収入台帳。「稼いだ」と「入金された」を分けて管理。入金予測・締切/催促リマインダー・多通貨・CSV/PDF 書き出し。すべて端末内、プライバシー優先。","url":"https://pluscoin.glspace.co.jp/","installUrl":"https://apps.apple.com/app/id6788990507","image":"https://pluscoin.glspace.co.jp/icon-512.png","inLanguage":["ja","en","zh-Hans","zh-Hant"],"publisher":{"@id":"https://pluscoin.glspace.co.jp/#org"}},{"@type":"FAQPage","@id":"https://pluscoin.glspace.co.jp/#faq","inLanguage":"ja","mainEntity":[{"@type":"Question","name":"副業の「稼いだお金」と「入金されたお金」を分けて管理できるアプリは？","acceptedAnswer":{"@type":"Answer","text":"PlusCoin は、クリエイター・副業のための iPhone 向け収入台帳アプリです。案件を入金ステータス（打診中 → 進行中 → 入金待ち → 入金済み）で管理し、まだ受け取っていない「入金待ち」のお金をひと目で確認できます。"}},{"@type":"Question","name":"PlusCoin はサブスクですか？","acceptedAnswer":{"@type":"Answer","text":"いいえ、PlusCoin はサブスクリプションではありません。収支の記録・入金ステータス管理・集計グラフ・締切リマインダーなどの基本機能は無料で、Pro は買い切りです。アプリ内で 7 日間、全機能をお試しいただけます。"}},{"@type":"Question","name":"PlusCoin のデータはどこに保存されますか？","acceptedAnswer":{"@type":"Answer","text":"PlusCoin のデータはお使いの端末内に保存されます。アカウント登録は不要で、当社のサーバーはありません。iCloud 同期（Pro）を有効にした場合も、同期先はご自身の iCloud プライベートデータベースだけです。"}},{"@type":"Question","name":"PlusCoin は外部と通信したり、利用状況を追跡したりしますか？","acceptedAnswer":{"@type":"Answer","text":"PlusCoin が行う外部通信は為替レートの取得（欧州中央銀行のデータを提供する frankfurter.dev）だけで、個人データは送信しません。広告・アクセス解析・トラッキング用の第三者 SDK は使っていません。Pro の購入は Apple の App Store が処理します。"}},{"@type":"Question","name":"PlusCoin の記録は確定申告用に書き出せますか？","acceptedAnswer":{"@type":"Answer","text":"はい。PlusCoin Pro では記録を CSV / PDF で書き出せ、主通貨の換算列や領収書の添付にも対応しています。確定申告や記録の保管にお使いいただけます。"}},{"@type":"Question","name":"PlusCoin の対応機種と対応言語は？","acceptedAnswer":{"@type":"Answer","text":"PlusCoin は iPhone（iOS 17 以降）に対応しています。表示言語は日本語・英語・簡体字中国語・繁体字中国語の 4 言語です。"}}]}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
@@ -201,6 +201,12 @@
   .plan li::before{content:"✓";color:var(--gold);font-weight:800}
   .pnote{font-size:12.5px;color:var(--faint);margin-top:16px}
 
+  /* FAQ（FAQPage JSON-LD と同じ辞書キーから生成） */
+  .faq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:34px}
+  .faq .card h3{line-height:1.5}
+  .faq .card h3,.faq .card p{overflow-wrap:anywhere}
+  .faq .card p{line-height:1.75;text-wrap:pretty}
+  @media(max-width:760px){.faq{grid-template-columns:minmax(0,1fr)}}
   /* PRIVACY strip */
   .privacy{background:var(--surface);border:1px solid var(--hair);border-radius:24px;padding:38px clamp(24px,4vw,48px);text-align:center;margin-top:8px}
   .privacy .ic{width:58px;height:58px;margin:0 auto;border-radius:16px;display:flex;align-items:center;justify-content:center;
@@ -425,6 +431,22 @@
     <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3.5 8.4-7 10-3.5-1.6-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
     <h2 data-i18n="pv.title">データは、あなたの端末に。</h2>
     <p data-i18n="pv.desc">アカウント不要・当社サーバーなし。同期はご自身のプライベート iCloud だけ。唯一の通信は為替レートの取得で、個人データは一切送信しません。追跡や解析もありません。</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="wrap">
+  <div data-reveal>
+    <div class="kicker" data-i18n="faq.kicker">FAQ</div>
+    <h2 data-i18n="faq.title">よくある質問。</h2>
+  </div>
+  <div class="faq">
+    <div class="card" data-reveal><h3 data-i18n="faq.q1">副業の「稼いだお金」と「入金されたお金」を分けて管理できるアプリは？</h3><p data-i18n="faq.a1">PlusCoin は、クリエイター・副業のための iPhone 向け収入台帳アプリです。案件を入金ステータス（打診中 → 進行中 → 入金待ち → 入金済み）で管理し、まだ受け取っていない「入金待ち」のお金をひと目で確認できます。</p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q2">PlusCoin はサブスクですか？</h3><p data-i18n="faq.a2">いいえ、PlusCoin はサブスクリプションではありません。収支の記録・入金ステータス管理・集計グラフ・締切リマインダーなどの基本機能は無料で、Pro は買い切りです。アプリ内で 7 日間、全機能をお試しいただけます。</p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q3">PlusCoin のデータはどこに保存されますか？</h3><p data-i18n="faq.a3">PlusCoin のデータはお使いの端末内に保存されます。アカウント登録は不要で、当社のサーバーはありません。iCloud 同期（Pro）を有効にした場合も、同期先はご自身の iCloud プライベートデータベースだけです。</p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q4">PlusCoin は外部と通信したり、利用状況を追跡したりしますか？</h3><p data-i18n="faq.a4">PlusCoin が行う外部通信は為替レートの取得（欧州中央銀行のデータを提供する frankfurter.dev）だけで、個人データは送信しません。広告・アクセス解析・トラッキング用の第三者 SDK は使っていません。Pro の購入は Apple の App Store が処理します。</p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q5">PlusCoin の記録は確定申告用に書き出せますか？</h3><p data-i18n="faq.a5">はい。PlusCoin Pro では記録を CSV / PDF で書き出せ、主通貨の換算列や領収書の添付にも対応しています。確定申告や記録の保管にお使いいただけます。</p></div>
+    <div class="card" data-reveal><h3 data-i18n="faq.q6">PlusCoin の対応機種と対応言語は？</h3><p data-i18n="faq.a6">PlusCoin は iPhone（iOS 17 以降）に対応しています。表示言語は日本語・英語・簡体字中国語・繁体字中国語の 4 言語です。</p></div>
   </div>
 </section>
 
